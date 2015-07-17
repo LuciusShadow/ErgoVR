@@ -61,7 +61,7 @@ public class MoveBike : MonoBehaviour {
 				);
 		//}
 		frontWheel.steerAngle = steer;
-		//rearWheel.motorTorque = Input.GetAxis("Vertical") * 30;
+//		rearWheel.motorTorque = Input.GetAxis("Vertical") * 30;
 
 		rearWheel.motorTorque = torque;
 		
@@ -70,6 +70,7 @@ public class MoveBike : MonoBehaviour {
 		//frontWheel.brakeTorque = 90;
 
 			//frontWheel.brakeTorque = 0;
+
 
 
 

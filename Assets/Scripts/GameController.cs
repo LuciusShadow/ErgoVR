@@ -12,18 +12,16 @@ public class GameController : MonoBehaviour {
 
 	public int energy = 1;
 
-	private CharacterController controller;
+	public CharacterController controller;
 
-	public GameObject explosion;
-
-	public AudioClip boom;
+//	public GameObject explosion;
+//
+//	public AudioClip boom;
 
 
 	// Use this for initialization
 	void Start () {
 
-
-		controller = GetComponent<CharacterController>();
 		score = 0;
 		InvokeRepeating("IncreaseScore",delay,interval);
 	}
@@ -35,9 +33,9 @@ public class GameController : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision){
 
-		GameObject expl = Instantiate(explosion, transform.position, Quaternion.identity) as GameObject;
-		Destroy(expl, 3); // delete the explosion after 3 seconds
-		AudioSource.PlayClipAtPoint(boom, transform.position);
+//		GameObject expl = Instantiate(explosion, transform.position, Quaternion.identity) as GameObject;
+//		Destroy(expl, 3); // delete the explosion after 3 seconds
+//		AudioSource.PlayClipAtPoint(boom, transform.position);
 		energy-=1; //If hit, lose one life
 	}
 

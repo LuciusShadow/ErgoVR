@@ -213,10 +213,8 @@ public class SerialPortScript : MonoBehaviour {
 						//Debug.Log("Received: " + sb.ToString());
 
 						
-					} //TODO: DRINGEND eine Alternative finden. Here be dragons und so
-					catch(TimeoutException){
-						//print ("Timeout");
-					}
+					} 
+					catch(TimeoutException){}
 					catch (System.Exception e) {
 						print ("System.Exception in serial.ReadLine: " + e.ToString ());
 					}
@@ -239,7 +237,6 @@ public class SerialPortScript : MonoBehaviour {
  ***********************************************************/
 	void sendByte(byte[] message){
 		port.Write (message, 0, message.Length);
-		//Debug.Log ("Data " + message + " Send ");
 
 	}
 /***********************************************************
