@@ -3,8 +3,7 @@ using System.Collections;
 
 public class BikePitch : MonoBehaviour {
 
-	public float turnSpeed = 100;
-	public Transform rotationPoint; 
+	public float turnSpeed = 100; 
 	public float maxRotation = 30; //Maximaler Winkel
 
 	//public WheelCollider frontWheel;
@@ -47,13 +46,13 @@ public class BikePitch : MonoBehaviour {
 //		transform.position = bikePosition;
 		pitch = accelerometer.Acceleration.y;
 		pitch = -pitch * maxRotation;
-		//EulerAngles x and y of BikeSprite have to be the same as the Illusion, EulerAngle for z stays the same as the previous frame
-		transform.rotation =  Quaternion.Euler(bike.transform.eulerAngles.x,bike.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+		//Passe Richtung an.
+		transform.rotation =  Quaternion.Euler(bike.transform.eulerAngles.x,-bike.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
 		//print (pitch);
 		if(Mathf.Abs(pitch) <= 30f)
 			//transform.RotateAround(rotationPoint.position, transform.forward, pitch);
-			setEulerAngles(transform.eulerAngles.x, transform.eulerAngles.y, 0 + pitch);
+			setEulerAngles(transform.eulerAngles.x, -180 + bike.transform.rotation.eulerAngles.y, 0 -pitch);
 //		else
 //			transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0,90,0),turnSpeed*Time.deltaTime);
 

@@ -7,17 +7,17 @@ public class MoveBike : MonoBehaviour {
 	public WheelCollider frontWheel;
 	public WheelCollider rearWheel;
 
-	Rigidbody rb;
 
-	GameObject bike;
+
+	public GameObject bike;
 	Transform bBody;
 
 	// Use this for initialization
 	void Start () {
 		accelerometer = GameObject.Find("DataHub").GetComponent<SerialPortScript>();
-		bike = GameObject.Find("Bike");
-		rb = bike.GetComponent<Rigidbody>();
-		rb.centerOfMass = new Vector3(0, -1f, -1f);
+		//bike = GameObject.Find("Bike");
+
+		//rb.centerOfMass = new Vector3(0, 1f, 1f);
 
 		//bBody = GameObject.Find ("BikeBody").transform;
 	}
@@ -52,7 +52,7 @@ public class MoveBike : MonoBehaviour {
 		//Kompensieren der Masseeinstellungen im Editor
 		torque = torque * Time.deltaTime;
 
-		float steer = 20 * Input.GetAxis("Horizontal");
+		//float steer = 20 * Input.GetAxis("Horizontal");
 		//if(true){
 			bike.transform.eulerAngles = new Vector3(
 				bike.transform.eulerAngles.x,
@@ -60,7 +60,7 @@ public class MoveBike : MonoBehaviour {
 				0//bike.transform.eulerAngles.z
 				);
 		//}
-		frontWheel.steerAngle = steer;
+		//frontWheel.steerAngle = steer;
 //		rearWheel.motorTorque = Input.GetAxis("Vertical") * 30;
 
 		rearWheel.motorTorque = torque;

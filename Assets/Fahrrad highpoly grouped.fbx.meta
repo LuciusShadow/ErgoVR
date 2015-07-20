@@ -1,0 +1,462 @@
+fileFormatVersion: 2
+guid: 496b48a6938fbd54e839cfbf47dc4c0c
+timeCreated: 1437309998
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: BezierCircle
+    100002: Blechhaltern rechts
+    100004: Bremse haltung links
+    100006: Bremse Haltung rechts
+    100008: Bremse hebel links
+    100010: Bremse hebel rechts
+    100012: Bremse hinten
+    100014: Bremse vorne
+    100016: Bremsenschlauch hinten
+    100018: bremsschlauch vorne
+    100020: "D\xE4mpfer stange"
+    100022: Empty
+    100024: Empty chain
+    100026: Empty Pedal links
+    100028: Empty Pedal rechts
+    100030: //RootNode
+    100032: Kettenglied.043
+    100034: Lampe fassung
+    100036: Lampe glas
+    100038: Lenker
+    100040: "Lenker aufh\xE4ngung"
+    100042: Pedal links
+    100044: Pedal rechts
+    100046: "Pedalaufh\xE4ngung links"
+    100048: "Pedalaufh\xE4ngung rechts"
+    100050: Plane.001
+    100052: Plane.002
+    100054: Radblech halter hinten links
+    100056: Radblech halter hinten rechts
+    100058: Radblechs halter vorne lin
+    100060: Radkappen
+    100062: Radspeichen hinten
+    100064: Radspeichen vorne
+    100066: Reifen mitte vorne
+    100068: Reifen mitte vorne.001
+    100070: Reifen mitte vorne.002
+    100072: Reifen mitte vorne.003
+    100074: Reifen mitte vorne.004
+    100076: Reifen mitte vorne.005
+    100078: Sattel
+    100080: Schaltung hinten 1
+    100082: Schaltung hinten 2
+    100084: Schaltung hinten 3
+    100086: Schaltung hinten 4
+    100088: Schaltung hinten 5
+    100090: Schaltung vorne 1
+    100092: Schaltung vorne 1.001
+    100094: Schaltung vorne 2
+    100096: Schaltung vorne 3
+    100098: Schraube
+    100100: Schraube hinten
+    100102: Schraube Umstellrad oben
+    100104: Schraube Umstellrad unten
+    100106: Schraube vorne mitte
+    100108: Stange 1
+    100110: Stange 2
+    100112: Stange 3
+    100114: Stange 4
+    100116: Stange 5
+    100118: Stange hinten 1
+    100120: Stange hinten 2
+    100122: Stange hinten 3
+    100124: Stange hinten 4
+    100126: Stange zu Lenker
+    100128: Umstellrad oben
+    100130: Umstellrad unten
+    100132: Verbindung hinten 1
+    100134: Verbindung hinten links
+    400000: BezierCircle
+    400002: Blechhaltern rechts
+    400004: Bremse haltung links
+    400006: Bremse Haltung rechts
+    400008: Bremse hebel links
+    400010: Bremse hebel rechts
+    400012: Bremse hinten
+    400014: Bremse vorne
+    400016: Bremsenschlauch hinten
+    400018: bremsschlauch vorne
+    400020: "D\xE4mpfer stange"
+    400022: Empty
+    400024: Empty chain
+    400026: Empty Pedal links
+    400028: Empty Pedal rechts
+    400030: //RootNode
+    400032: Kettenglied.043
+    400034: Lampe fassung
+    400036: Lampe glas
+    400038: Lenker
+    400040: "Lenker aufh\xE4ngung"
+    400042: Pedal links
+    400044: Pedal rechts
+    400046: "Pedalaufh\xE4ngung links"
+    400048: "Pedalaufh\xE4ngung rechts"
+    400050: Plane.001
+    400052: Plane.002
+    400054: Radblech halter hinten links
+    400056: Radblech halter hinten rechts
+    400058: Radblechs halter vorne lin
+    400060: Radkappen
+    400062: Radspeichen hinten
+    400064: Radspeichen vorne
+    400066: Reifen mitte vorne
+    400068: Reifen mitte vorne.001
+    400070: Reifen mitte vorne.002
+    400072: Reifen mitte vorne.003
+    400074: Reifen mitte vorne.004
+    400076: Reifen mitte vorne.005
+    400078: Sattel
+    400080: Schaltung hinten 1
+    400082: Schaltung hinten 2
+    400084: Schaltung hinten 3
+    400086: Schaltung hinten 4
+    400088: Schaltung hinten 5
+    400090: Schaltung vorne 1
+    400092: Schaltung vorne 1.001
+    400094: Schaltung vorne 2
+    400096: Schaltung vorne 3
+    400098: Schraube
+    400100: Schraube hinten
+    400102: Schraube Umstellrad oben
+    400104: Schraube Umstellrad unten
+    400106: Schraube vorne mitte
+    400108: Stange 1
+    400110: Stange 2
+    400112: Stange 3
+    400114: Stange 4
+    400116: Stange 5
+    400118: Stange hinten 1
+    400120: Stange hinten 2
+    400122: Stange hinten 3
+    400124: Stange hinten 4
+    400126: Stange zu Lenker
+    400128: Umstellrad oben
+    400130: Umstellrad unten
+    400132: Verbindung hinten 1
+    400134: Verbindung hinten links
+    2300000: BezierCircle
+    2300002: Blechhaltern rechts
+    2300004: Bremse haltung links
+    2300006: Bremse Haltung rechts
+    2300008: Bremse hebel links
+    2300010: Bremse hebel rechts
+    2300012: Bremse hinten
+    2300014: Bremse vorne
+    2300016: Bremsenschlauch hinten
+    2300018: bremsschlauch vorne
+    2300020: "D\xE4mpfer stange"
+    2300022: Kettenglied.043
+    2300024: Lampe fassung
+    2300026: Lampe glas
+    2300028: Lenker
+    2300030: "Lenker aufh\xE4ngung"
+    2300032: Pedal links
+    2300034: Pedal rechts
+    2300036: "Pedalaufh\xE4ngung links"
+    2300038: "Pedalaufh\xE4ngung rechts"
+    2300040: Plane.001
+    2300042: Plane.002
+    2300044: Radblech halter hinten links
+    2300046: Radblech halter hinten rechts
+    2300048: Radblechs halter vorne lin
+    2300050: Radkappen
+    2300052: Radspeichen hinten
+    2300054: Radspeichen vorne
+    2300056: Reifen mitte vorne
+    2300058: Reifen mitte vorne.001
+    2300060: Reifen mitte vorne.002
+    2300062: Reifen mitte vorne.003
+    2300064: Reifen mitte vorne.004
+    2300066: Reifen mitte vorne.005
+    2300068: Sattel
+    2300070: Schaltung hinten 1
+    2300072: Schaltung hinten 2
+    2300074: Schaltung hinten 3
+    2300076: Schaltung hinten 4
+    2300078: Schaltung hinten 5
+    2300080: Schaltung vorne 1
+    2300082: Schaltung vorne 1.001
+    2300084: Schaltung vorne 2
+    2300086: Schaltung vorne 3
+    2300088: Schraube
+    2300090: Schraube hinten
+    2300092: Schraube Umstellrad oben
+    2300094: Schraube Umstellrad unten
+    2300096: Schraube vorne mitte
+    2300098: Stange 1
+    2300100: Stange 2
+    2300102: Stange 3
+    2300104: Stange 4
+    2300106: Stange 5
+    2300108: Stange hinten 1
+    2300110: Stange hinten 2
+    2300112: Stange hinten 3
+    2300114: Stange hinten 4
+    2300116: Stange zu Lenker
+    2300118: Umstellrad oben
+    2300120: Umstellrad unten
+    2300122: Verbindung hinten 1
+    2300124: Verbindung hinten links
+    3300000: BezierCircle
+    3300002: Blechhaltern rechts
+    3300004: Bremse haltung links
+    3300006: Bremse Haltung rechts
+    3300008: Bremse hebel links
+    3300010: Bremse hebel rechts
+    3300012: Bremse hinten
+    3300014: Bremse vorne
+    3300016: Bremsenschlauch hinten
+    3300018: bremsschlauch vorne
+    3300020: "D\xE4mpfer stange"
+    3300022: Kettenglied.043
+    3300024: Lampe fassung
+    3300026: Lampe glas
+    3300028: Lenker
+    3300030: "Lenker aufh\xE4ngung"
+    3300032: Pedal links
+    3300034: Pedal rechts
+    3300036: "Pedalaufh\xE4ngung links"
+    3300038: "Pedalaufh\xE4ngung rechts"
+    3300040: Plane.001
+    3300042: Plane.002
+    3300044: Radblech halter hinten links
+    3300046: Radblech halter hinten rechts
+    3300048: Radblechs halter vorne lin
+    3300050: Radkappen
+    3300052: Radspeichen hinten
+    3300054: Radspeichen vorne
+    3300056: Reifen mitte vorne
+    3300058: Reifen mitte vorne.001
+    3300060: Reifen mitte vorne.002
+    3300062: Reifen mitte vorne.003
+    3300064: Reifen mitte vorne.004
+    3300066: Reifen mitte vorne.005
+    3300068: Sattel
+    3300070: Schaltung hinten 1
+    3300072: Schaltung hinten 2
+    3300074: Schaltung hinten 3
+    3300076: Schaltung hinten 4
+    3300078: Schaltung hinten 5
+    3300080: Schaltung vorne 1
+    3300082: Schaltung vorne 1.001
+    3300084: Schaltung vorne 2
+    3300086: Schaltung vorne 3
+    3300088: Schraube
+    3300090: Schraube hinten
+    3300092: Schraube Umstellrad oben
+    3300094: Schraube Umstellrad unten
+    3300096: Schraube vorne mitte
+    3300098: Stange 1
+    3300100: Stange 2
+    3300102: Stange 3
+    3300104: Stange 4
+    3300106: Stange 5
+    3300108: Stange hinten 1
+    3300110: Stange hinten 2
+    3300112: Stange hinten 3
+    3300114: Stange hinten 4
+    3300116: Stange zu Lenker
+    3300118: Umstellrad oben
+    3300120: Umstellrad unten
+    3300122: Verbindung hinten 1
+    3300124: Verbindung hinten links
+    4300000: Kettenglied.043
+    4300002: BezierCircle
+    4300004: Reifen mitte vorne.005
+    4300006: Reifen mitte vorne.004
+    4300008: Reifen mitte vorne.003
+    4300010: Reifen mitte vorne.002
+    4300012: Reifen mitte vorne.001
+    4300014: Schaltung vorne 1.001
+    4300016: Schaltung vorne 1
+    4300018: "Pedalaufh\xE4ngung links"
+    4300020: Pedal links
+    4300022: Reifen mitte vorne
+    4300024: Radspeichen vorne
+    4300026: Radspeichen hinten
+    4300028: "Pedalaufh\xE4ngung rechts"
+    4300030: Pedal rechts
+    4300032: Schaltung vorne 2
+    4300034: Lampe glas
+    4300036: Verbindung hinten links
+    4300038: Bremse hinten
+    4300040: "Lenker aufh\xE4ngung"
+    4300042: Bremse Haltung rechts
+    4300044: Bremse haltung links
+    4300046: Bremse hebel rechts
+    4300048: Bremse hebel links
+    4300050: Sattel
+    4300052: Stange hinten 4
+    4300054: Bremsenschlauch hinten
+    4300056: Stange hinten 2
+    4300058: Stange hinten 3
+    4300060: Schraube hinten
+    4300062: Schaltung vorne 3
+    4300064: Schraube
+    4300066: Schraube Umstellrad oben
+    4300068: Umstellrad oben
+    4300070: Schraube Umstellrad unten
+    4300072: Radkappen
+    4300074: Schaltung hinten 1
+    4300076: Schaltung hinten 2
+    4300078: Schaltung hinten 3
+    4300080: Schaltung hinten 4
+    4300082: Schaltung hinten 5
+    4300084: Umstellrad unten
+    4300086: Verbindung hinten 1
+    4300088: Stange hinten 1
+    4300090: Plane.002
+    4300092: Radblech halter hinten rechts
+    4300094: Radblech halter hinten links
+    4300096: Lenker
+    4300098: Stange zu Lenker
+    4300100: Lampe fassung
+    4300102: bremsschlauch vorne
+    4300104: Bremse vorne
+    4300106: Radblechs halter vorne lin
+    4300108: Blechhaltern rechts
+    4300110: "D\xE4mpfer stange"
+    4300112: Schraube vorne mitte
+    4300114: Stange 5
+    4300116: Stange 4
+    4300118: Stange 3
+    4300120: Stange 2
+    4300122: Stange 1
+    4300124: Plane.001
+    7400000: Empty Pedal links|EmptyAction
+    7400002: Empty Pedal rechts|EmptyAction
+    7400004: Empty chain|EmptyAction
+    7400006: BezierCircle|EmptyAction
+    7400008: Kettenglied.043|EmptyAction
+    7400010: Empty|EmptyAction
+    7400012: Reifen mitte vorne.005|EmptyAction
+    7400014: Reifen mitte vorne.004|EmptyAction
+    7400016: Reifen mitte vorne.003|EmptyAction
+    7400018: Reifen mitte vorne.002|EmptyAction
+    7400020: Reifen mitte vorne.001|EmptyAction
+    7400022: Schaltung vorne 1.001|EmptyAction
+    7400024: Schaltung vorne 1|EmptyAction
+    7400026: "Pedalaufh\xE4ngung links|EmptyAction"
+    7400028: Pedal links|EmptyAction
+    7400030: Reifen mitte vorne|EmptyAction
+    7400032: Radspeichen vorne|EmptyAction
+    7400034: Radspeichen hinten|EmptyAction
+    7400036: "Pedalaufh\xE4ngung rechts|EmptyAction"
+    7400038: Pedal rechts|EmptyAction
+    7400040: Schaltung vorne 2|EmptyAction
+    7400042: Lampe glas|EmptyAction
+    7400044: Verbindung hinten links|EmptyAction
+    7400046: Bremse hinten|EmptyAction
+    7400048: "Lenker aufh\xE4ngung|EmptyAction"
+    7400050: Bremse Haltung rechts|EmptyAction
+    7400052: Bremse haltung links|EmptyAction
+    7400054: Bremse hebel rechts|EmptyAction
+    7400056: Bremse hebel links|EmptyAction
+    7400058: Sattel|EmptyAction
+    7400060: Stange hinten 4|EmptyAction
+    7400062: Bremsenschlauch hinten|EmptyAction
+    7400064: Stange hinten 2|EmptyAction
+    7400066: Stange hinten 3|EmptyAction
+    7400068: Schraube hinten|EmptyAction
+    7400070: Schaltung vorne 3|EmptyAction
+    7400072: Schraube|EmptyAction
+    7400074: Schraube Umstellrad oben|EmptyAction
+    7400076: Umstellrad oben|EmptyAction
+    7400078: Schraube Umstellrad unten|EmptyAction
+    7400080: Radkappen|EmptyAction
+    7400082: Schaltung hinten 1|EmptyAction
+    7400084: Schaltung hinten 2|EmptyAction
+    7400086: Schaltung hinten 3|EmptyAction
+    7400088: Schaltung hinten 4|EmptyAction
+    7400090: Schaltung hinten 5|EmptyAction
+    7400092: Umstellrad unten|EmptyAction
+    7400094: Verbindung hinten 1|EmptyAction
+    7400096: Stange hinten 1|EmptyAction
+    7400098: Plane.002|EmptyAction
+    7400100: Radblech halter hinten rechts|EmptyAction
+    7400102: Radblech halter hinten links|EmptyAction
+    7400104: Lenker|EmptyAction
+    7400106: Stange zu Lenker|EmptyAction
+    7400108: Lampe fassung|EmptyAction
+    7400110: bremsschlauch vorne|EmptyAction
+    7400112: Bremse vorne|EmptyAction
+    7400114: Radblechs halter vorne lin|EmptyAction
+    7400116: Blechhaltern rechts|EmptyAction
+    7400118: "D\xE4mpfer stange|EmptyAction"
+    7400120: Schraube vorne mitte|EmptyAction
+    7400122: Stange 5|EmptyAction
+    7400124: Stange 4|EmptyAction
+    7400126: Stange 3|EmptyAction
+    7400128: Stange 2|EmptyAction
+    7400130: Stange 1|EmptyAction
+    7400132: Plane.001|EmptyAction
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -26,11 +26,14 @@ public class Handlebars : MonoBehaviour {
 
 		//bikePosition = bike.transform.position;
 		//transform.position = new Vector3(bikePosition.x + 2, bikePosition.y + 1, bikePosition.z);
-		transform.Rotate(this.transform.up, 10 * Time.deltaTime); 
+		//transform.Rotate(this.transform.up, 10 * Time.deltaTime); 
 		//Testing
 		float rotate = accelerometer.Acceleration.y * maxAngle;
 		//transform.RotateAround(this.transform.up, rotate);
-		setEulerAngles(body.eulerAngles.x, 90 + rotate, body.eulerAngles.z);
+		float steer = 20 * Input.GetAxis("Horizontal");
+		frontWheel.steerAngle = steer;
+		rotate = steer;
+		setEulerAngles(transform.eulerAngles.x, rotate+body.eulerAngles.y, transform.eulerAngles.z);
 
 		//Hier Sensordaten auf WheelColliderLenkung anwenden
 

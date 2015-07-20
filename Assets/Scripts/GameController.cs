@@ -12,12 +12,6 @@ public class GameController : MonoBehaviour {
 
 	public int energy = 1;
 
-	public CharacterController controller;
-
-//	public GameObject explosion;
-//
-//	public AudioClip boom;
-
 
 	// Use this for initialization
 	void Start () {
@@ -32,23 +26,23 @@ public class GameController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision){
-
-//		GameObject expl = Instantiate(explosion, transform.position, Quaternion.identity) as GameObject;
-//		Destroy(expl, 3); // delete the explosion after 3 seconds
-//		AudioSource.PlayClipAtPoint(boom, transform.position);
-		energy-=1; //If hit, lose one life
+		if(collision.collider.tag != "Pickup")
+			energy-=1; //If hit by, lose one life
+		else {
+			score += 5;
+		}
 	}
 
 	void IncreaseScore()
 	{
-		if(controller.velocity.x > 0)
-		score+=scoreFactor;
+//		if(controller.velocity.x > 0)
+//		score+=scoreFactor;
 	}
 
 	void OnGUI(){
 
 
-		GUI.Label (new Rect(10,10,400,20), "Score: "+score+" Health: "+energy+"  Vel:"+controller.velocity.magnitude);
+		GUI.Label (new Rect(10,10,400,20), "Score: "+score+" Health: "+energy);
 		if(energy <= 0){
 			GUI.Label (new Rect(Screen.width - 600, Screen.height - 250,400,20), "Game Over!", mystyle);
 			Time.timeScale = 0;
