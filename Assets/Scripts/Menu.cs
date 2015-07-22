@@ -8,6 +8,7 @@ public class Menu : MonoBehaviour {
     public GameObject Bike;
 	public GameObject BikeBody;
 	public GameObject Handlebars;
+	public Camera PlayerCam;
 
 	MoveBike _moveBike;
 	AutoMove _moveBikeAuto;
@@ -22,7 +23,7 @@ public class Menu : MonoBehaviour {
 
 	public Button endButton;
 
-	Transform startPosition;
+	Vector3 startPosition;
 	// Use this for initialization
 	void Start () {
 		_moveBike = Bike.GetComponent<MoveBike>();
@@ -35,7 +36,7 @@ public class Menu : MonoBehaviour {
 		togglePitch.isOn = _bikePitch.enabled;
 		toggleHandle.isOn = _handlebars.enabled;
 
-		startPosition = Bike.transform;
+		startPosition = Bike.transform.position;
 	}
 	
 	// Update is called once per frame
@@ -53,7 +54,8 @@ public class Menu : MonoBehaviour {
 
 	public void resetButton(){
 		Debug.Log ("Spiel wird zurückgesetzt");
-		Bike.transform.position = startPosition.position;
+		Bike.transform.position = startPosition;
+		PlayerCam.transform.forward = Bike.transform.forward;
 	}
 
 	public void endGameButton(){
