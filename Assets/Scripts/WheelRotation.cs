@@ -19,12 +19,12 @@ public class WheelRotation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		velocity = -bike.velocity.sqrMagnitude/2;
+		velocity = -bike.velocity.z/2;
 
 		frontWheel.Rotate(velocity,0,0);
 		rearWheel.Rotate(velocity,0,0);
-		joint.Rotate(velocity/4,0,0);
-		rPedal.Rotate(-velocity/4,0,0);
-		lPedal.Rotate(-velocity/4,0,0);
+		joint.Rotate(velocity/2,0,0);
+		rPedal.Rotate(-velocity/2,0,0);
+		lPedal.Rotate(-velocity/2,0,0);
 	}
 }

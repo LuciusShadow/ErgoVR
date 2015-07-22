@@ -8,9 +8,9 @@ public class PickUpPickedUp : MonoBehaviour {
 
 		if(other.tag == "Player"){
 
-			gameObject.SetActive(false);
-			yield return new WaitForSeconds(10);
-			gameObject.SetActive(true);
+			gameObject.GetComponent<MeshRenderer>().enabled = false;
+			yield return new WaitForSeconds(15);
+			gameObject.GetComponent<MeshRenderer>().enabled = true;
 		}
 			 
 		

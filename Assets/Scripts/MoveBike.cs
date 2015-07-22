@@ -7,7 +7,6 @@ public class MoveBike : MonoBehaviour {
 	public WheelCollider frontWheel;
 	public WheelCollider rearWheel;
 
-	public Transform wheels;
 
 
 	public GameObject bike;

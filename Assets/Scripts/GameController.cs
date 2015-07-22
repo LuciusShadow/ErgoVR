@@ -13,11 +13,15 @@ public class GameController : MonoBehaviour {
 	public int energy = 3;
 	bool gameActive = false;
 
+	bool raceStart = false;
+
 	float time;
 	float endTime;
+	
 
 	// Use this for initialization
 	void Start () {
+
 		lab = lab + 1;
 		score = 0;
 		time = 0f;
@@ -28,6 +32,14 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(Input.GetKeyDown(KeyCode.Escape)){
+			gameActive = !gameActive;
+
+		}
+		if(gameActive){
+			Time.timeScale = 1;
+		}
+		else Time.timeScale = 0;
 
 	}
 
@@ -40,7 +52,7 @@ public class GameController : MonoBehaviour {
 			case "Ziellinie":
 				if(time == 0){
 					time = Time.realtimeSinceStartup;
-					gameActive = true;
+					raceStart = true;
 				}
 				break;
 			default: 
@@ -48,6 +60,7 @@ public class GameController : MonoBehaviour {
 				if(energy == 0){
 					gameActive = false;
 					endTime = Time.realtimeSinceStartup - time;
+					Time.timeScale = 0;
 				}
 				break;
 		}
@@ -56,21 +69,17 @@ public class GameController : MonoBehaviour {
 
 
 	void OnGUI(){
+//		print ("Race: "+raceStart + " " + "Game: " + gameActive);
+		if(raceStart && gameActive)
+		GUI.Label (new Rect(10,10,400,20), "Score: "+score+" Health: " + energy + " Time: " + (Time.realtimeSinceStartup - time).ToString("0.00"));
 
-		if(gameActive)
-		GUI.Label (new Rect(10,10,400,20), "Score: "+score+" Health: " + energy + " Time: " + (Time.realtimeSinceStartup - time));
-
-		if(energy <= 0){
+		if(energy <= 0 ){
 			time = Time.realtimeSinceStartup - time;
-
+			if(!gameActive)
 			GUI.Label (new Rect(Screen.width - 600, Screen.height - 250,400,20), 
-			           "Game Over! \n Zeit: " + endTime.ToString("0.00") + " Sekunden \n Erzielte Punkte: " + score, mystyle);
+				           "Game Over! \n Zeit: " + endTime.ToString("0.00") + " Sekunden \n Erzielte Punkte: " + score, mystyle);
 
-			Time.timeScale = 0;
 		}
-		if(lab == 0){
-			GUI.Label (new Rect(Screen.width - 600, Screen.height - 250,600,20), "Bonuspunkte: " + Mathf.Round(bonus/time), mystyle);
-			Time.timeScale = 0;
-		}
+
 	}
 }
