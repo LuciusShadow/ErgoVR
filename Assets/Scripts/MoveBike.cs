@@ -7,6 +7,7 @@ public class MoveBike : MonoBehaviour {
 	public WheelCollider frontWheel;
 	public WheelCollider rearWheel;
 
+	public Transform wheels;
 
 
 	public GameObject bike;
@@ -24,7 +25,7 @@ public class MoveBike : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
-
+		
 		float weight = 72f;
 		float vx = Mathf.Abs(accelerometer.Acceleration.x);
 		float vz = Mathf.Abs(accelerometer.Acceleration.z);
@@ -39,13 +40,11 @@ public class MoveBike : MonoBehaviour {
 		v=vx+vz;
 		weight = weight * 10; //weight to Newton
 
-		//vx > 0.16f && vz > 1 || 
+
 		if(v > 1.2f){
 			force =  weight * v * pedalr;
 		}
-		else{
-			//torque = torque/2;
-		}
+
 		
 		//Hinteres Zahnrad * (Kraft / vorderes Zahnrad)
 		torque = rearTeethr * (force / frontTeethr);
@@ -61,15 +60,13 @@ public class MoveBike : MonoBehaviour {
 				);
 		//}
 		//frontWheel.steerAngle = steer;
-//		rearWheel.motorTorque = Input.GetAxis("Vertical") * 30;
+		rearWheel.motorTorque = Input.GetAxis("Vertical") * 40;
+		frontWheel.motorTorque = Input.GetAxis("Vertical") * 40;
+//
+//		rearWheel.motorTorque = torque;
+//		
+//		frontWheel.motorTorque = torque;
 
-		rearWheel.motorTorque = torque;
-		
-		frontWheel.motorTorque = torque;
-
-		//frontWheel.brakeTorque = 90;
-
-			//frontWheel.brakeTorque = 0;
 
 
 

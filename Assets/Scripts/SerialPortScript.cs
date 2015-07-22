@@ -185,19 +185,18 @@ public class SerialPortScript : MonoBehaviour {
 
 						}//end for
 					switch(axis){
-					case 'x': 
-						xData = byteVal/gFactor;
-						break;
-					case 'y': 
-						yData = byteVal/gFactor;
-						count++;
-						break;
-					case 'z': 
-						zData = byteVal/gFactor;
-						break;
-					default:
-						
-						break;
+						case 'x': 
+							xData = byteVal/gFactor;
+							break;
+						case 'y': 
+							yData = byteVal/gFactor;
+							count++;
+							break;
+						case 'z': 
+							zData = byteVal/gFactor;
+							break;
+						default:
+							break;
 					}
 					if(axis != '0'){
 //						File.AppendAllText(filePath, Convert.ToString(byteVal/gFactor)+delimiter+"\r\n");

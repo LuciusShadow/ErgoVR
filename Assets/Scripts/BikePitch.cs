@@ -40,14 +40,10 @@ public class BikePitch : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		//pitch = accelerometer.Acceleration.x;
-		//Match BikeSprite Position with Position of Illusionbike
-//		bikePosition = bike.transform.position;
-//		transform.position = bikePosition;
 		pitch = accelerometer.Acceleration.y;
 		pitch = -pitch * maxRotation;
 		//Passe Richtung an.
-		transform.rotation =  Quaternion.Euler(bike.transform.eulerAngles.x,-bike.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+		//transform.rotation =  Quaternion.Euler(transform.rotation.x,-bike.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
 		//print (pitch);
 		if(Mathf.Abs(pitch) <= 30f)

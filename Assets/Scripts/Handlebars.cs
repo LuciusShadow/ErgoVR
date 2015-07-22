@@ -30,10 +30,10 @@ public class Handlebars : MonoBehaviour {
 		//Testing
 		float rotate = accelerometer.Acceleration.y * maxAngle;
 		//transform.RotateAround(this.transform.up, rotate);
-		float steer = 20 * Input.GetAxis("Horizontal");
+		float steer = 30 * Input.GetAxis("Horizontal");
 		frontWheel.steerAngle = steer;
 		rotate = steer;
-		setEulerAngles(transform.eulerAngles.x, rotate+body.eulerAngles.y, transform.eulerAngles.z);
+		setEulerAngles(transform.eulerAngles.x, rotate+body.eulerAngles.y, body.eulerAngles.z);
 
 		//Hier Sensordaten auf WheelColliderLenkung anwenden
 
