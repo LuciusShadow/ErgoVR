@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Menu : MonoBehaviour {
+	public Canvas userMenu;
 
     public GameObject Bike;
 	public GameObject BikeBody;
@@ -44,6 +45,10 @@ public class Menu : MonoBehaviour {
 		_bikePitch.enabled = togglePitch.isOn;
 		_handlebars.enabled = toggleHandle.isOn;
 
+		if(Input.GetKeyDown(KeyCode.Escape)){
+			userMenu.enabled = !userMenu.enabled;
+		}
+
 	}
 
 	public void resetButton(){
@@ -54,6 +59,10 @@ public class Menu : MonoBehaviour {
 	public void endGameButton(){
 		Debug.Log ("Spiel wird geschlossen");
 		Application.Quit ();
+	}
+
+	public void startGameButton(){
+		userMenu.enabled = !userMenu.enabled;
 	}
 
 
