@@ -99,7 +99,7 @@ public class SerialPortScript : MonoBehaviour {
  ***********************************************************/
 	private void init(){
 		receiveThread = new Thread(
-			new ThreadStart(RecieveData));
+			new ThreadStart(RecieveDataPedal));
 		receiveThread.IsBackground = true;
 		receiveThread.Start();
 	}
@@ -122,7 +122,7 @@ public class SerialPortScript : MonoBehaviour {
  * Parameter: keine
  * Rückgabewert: keinen
  ***********************************************************/
-	private void RecieveData () {
+	private void RecieveDataPedal () {
 //		string filePath = "E:\\log2.csv";
 //		if (!File.Exists(filePath)){
 //			File.Create(filePath).Close();
@@ -139,7 +139,7 @@ public class SerialPortScript : MonoBehaviour {
 			byte[] eventMsg = new byte[50]; // Stores whole data package
 			int dataLength = 8;				// Default input data length
 
-			sb = new StringBuilder();		// String builder for debug purposes
+			//sb = new StringBuilder();		// String builder for debug purposes
 			
 			char axis = '0';				// Which axis does the data belong to
 			if(initcomplete && port.IsOpen){
@@ -234,7 +234,7 @@ public class SerialPortScript : MonoBehaviour {
  * Parameter: keine
  * Rückgabewert: keinen
  ***********************************************************/
-	void sendByte(byte[] message){
+	void SendByte(byte[] message){
 		port.Write (message, 0, message.Length);
 
 	}
@@ -286,8 +286,10 @@ public class SerialPortScript : MonoBehaviour {
  * Rückgabewert: keinen
  ***********************************************************/
 	void TerminateConnection(){
+		//Beende Verbindung
 		byte[] disconnect = { 0x01, 0x0A, 0xFE, 0x03, 0x00, 0x00, 0x13 };
-		sendByte(disconnect);
+		SendByte(disconnect);
+		SendByte(new byte[]{0x01, 0x0A, 0xFE, 0x03, 0x01, 0x00, 0x13})
 		port.Close();
 		
 		print ("Port geschlossen");
@@ -304,34 +306,58 @@ public class SerialPortScript : MonoBehaviour {
 		byte[] init = { 0x01, 0x00, 0xFE, 0x26, 0x08, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00,
 			0x00, 0x00 }; //Initalize Dongle
-		sendByte(init);
+		SendByte(init);
 		yield return new WaitForSeconds(0.5f);
 		
 
 		
 	}
 /***********************************************************
- * Methode: ConnectWithTag
+ * Methode: ConnectWithTagPedal
+ * Beschreibung: Schreibt Anweisungen auf den Com-Port um
+ * den Dongle mit dem SensorTag am Pedal zu verbinden
+ * Parameter: keine
+ * Rückgabewert: keinen
+ ***********************************************************/
+	IEnumerator ConnectWithTagPedal(){
+		//byte[] disc = { 0x01, 0x30, 0xFE, 0x03, 0x15, 0x06, 0x00 }; // Scan
+		SendByte(new byte[]{ 0x01, 0x30, 0xFE, 0x03, 0x15, 0x06, 0x00 });
+		yield return new WaitForSeconds(0.5f);
+		print ("Connect Pedal");
+		
+		//byte[] canceldisc = { 0x01, 0x05, 0xFE, 0x00 }; //Cancel Scan
+		SendByte(new byte[]{ 0x01, 0x05, 0xFE, 0x00 });
+		
+		yield return new WaitForSeconds(0.5f);
+		//byte[] connectTag = {0x01, 0x09,  0xFE, 0x09, 0x00, 0x00, 0x00, 0xBF, 0x68, 0x64, 0x4C, 0x99, 0xB4 }; //Connect with SensorTag
+		SendByte(new byte[]{0x01, 0x09,  0xFE, 0x09, 0x00, 0x00, 0x00, 0xBF, 0x68, 0x64, 0x4C, 0x99, 0xB4 });
+		
+		yield return new WaitForSeconds(0.5f);
+
+		StartCoroutine(ActivateAccelerometer());
+	}
+/***********************************************************
+ * Methode: ConnectWithTagHandle
  * Beschreibung: Schreibt Anweisungen auf den Com-Port um
  * den Dongle mit dem SensorTag zu verbinden
  * Parameter: keine
  * Rückgabewert: keinen
  ***********************************************************/
-	IEnumerator ConnectWithTag(){
-		//byte[] disc = { 0x01, 0x30, 0xFE, 0x03, 0x15, 0x06, 0x00 }; // Discovery
-		sendByte(new byte[]{ 0x01, 0x30, 0xFE, 0x03, 0x15, 0x06, 0x00 });
+	IEnumerator ConnectWithTagHandle(){
+		//byte[] disc = { 0x01, 0x30, 0xFE, 0x03, 0x15, 0x06, 0x00 }; // Scan
+		SendByte(new byte[]{ 0x01, 0x30, 0xFE, 0x03, 0x15, 0x06, 0x00 });
 		yield return new WaitForSeconds(0.5f);
-		print ("Connect");
+		print ("Connect Handle");
 		
-		//byte[] canceldisc = { 0x01, 0x05, 0xFE, 0x00 }; //Cancel Discovery
-		sendByte(new byte[]{ 0x01, 0x05, 0xFE, 0x00 });
-		
-		yield return new WaitForSeconds(0.5f);
-		//byte[] connectTag = {0x01, 0x09,  0xFE, 0x09, 0x00, 0x00, 0x00, 0xBF, 0x68, 0x64, 0x4C, 0x99, 0xB4 }; //Connect with SensorTag
-		sendByte(new byte[]{0x01, 0x09,  0xFE, 0x09, 0x00, 0x00, 0x00, 0xBF, 0x68, 0x64, 0x4C, 0x99, 0xB4 });
+		//byte[] canceldisc = { 0x01, 0x05, 0xFE, 0x00 }; //Cancel Scan
+		SendByte(new byte[]{ 0x01, 0x05, 0xFE, 0x00 });
 		
 		yield return new WaitForSeconds(0.5f);
-
+		 //Connect with SensorTag
+		SendByte(new byte[]{0x01, 0x09,  0xFE, 0x09, 0x00, 0x00, 0x00, 0xBD, 0x29, 0x8C, 0x04, 0xA5, 0x78 });
+		
+		yield return new WaitForSeconds(0.5f);
+		
 		StartCoroutine(ActivateAccelerometer());
 	}
 /***********************************************************
@@ -348,25 +374,25 @@ public class SerialPortScript : MonoBehaviour {
 		//Enable Acceleromenter
 		command[pos] = 0x34;
 		//sendByte(new byte[]{0x01, 0x92, 0xFD, 0x06, 0x00, 0x00, 0x34, 0x00, 0x01, 0x00});
-		sendByte(command);
+		SendByte(command);
 
 		yield return new WaitForSeconds(0.5f);
 		//Activate Notifications for x-axis
 		command[pos] = 0x3B;
 		//sendByte(new byte[]{0x01, 0x92, 0xFD, 0x06, 0x00, 0x00, 0x3B, 0x00, 0x01, 0x00});
-		sendByte(command);
+		SendByte(command);
 		
 		yield return new WaitForSeconds(0.5f);
 		//Activate Notifications for y-axis
 		command[pos] = 0x3F;
 		//sendByte(new byte[]{0x01, 0x92, 0xFD, 0x06, 0x00, 0x00, 0x3F, 0x00, 0x01, 0x00 });
-		sendByte(command);
+		SendByte(command);
 		
 		yield return new WaitForSeconds(0.5f);
 		//Activate Notifications for z-axis
 		command[pos] = 0x43;
 		//sendByte(new byte[]{0x01, 0x92, 0xFD, 0x06, 0x00, 0x00, 0x43, 0x00, 0x01, 0x00 });
-		sendByte(command);
+		SendByte(command);
 		
 		yield return new WaitForSeconds(1f);
 		Debug.Log("Connection established at: " + DateTime.Now);
@@ -382,7 +408,7 @@ public class SerialPortScript : MonoBehaviour {
  ***********************************************************/
 	public void EnableAcc(){
 
-		StartCoroutine(ConnectWithTag());
+		StartCoroutine(ConnectWithTagPedal());
 		if(port.IsOpen){
 			print ("Enable");
 			startButton.gameObject.SetActive(true);

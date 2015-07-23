@@ -12,7 +12,7 @@ public class Handlebars : MonoBehaviour {
 	public WheelCollider frontWheel;
 	Vector3 gyroData;
 
-
+	public GameObject obstacles;
 	// Use this for initialization
 	void Start () {
 		gyroData = new Vector3(0,0,0);
@@ -23,19 +23,19 @@ public class Handlebars : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		if(obstacles.activeSelf == false)
+			obstacles.SetActive(true);
 
 		//bikePosition = bike.transform.position;
 		//transform.position = new Vector3(bikePosition.x + 2, bikePosition.y + 1, bikePosition.z);
 		//transform.Rotate(this.transform.up, 10 * Time.deltaTime); 
 		//Testing
 		float rotate = accelerometer.Acceleration.y * maxAngle;
-		//transform.RotateAround(this.transform.up, rotate);
 		float steer = 30 * Input.GetAxis("Horizontal");
 		frontWheel.steerAngle = steer;
 		rotate = steer;
 		setEulerAngles(transform.eulerAngles.x, rotate+body.eulerAngles.y, body.eulerAngles.z);
 
-		//Hier Sensordaten auf WheelColliderLenkung anwenden
 
 	}
 
