@@ -41,7 +41,7 @@ public class Menu : MonoBehaviour {
 
 		startPosition = Bike.transform;
 	}
-	
+	public GameObject ovrRig;
 	// Update is called once per frame
 	void Update () {
 		_moveBike.enabled = toggleMove.isOn;
@@ -52,6 +52,12 @@ public class Menu : MonoBehaviour {
 
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			userMenu.enabled = !userMenu.enabled;
+		}
+
+		if(userMenu.isActiveAndEnabled){
+			ovrRig.SetActive(false);
+		} else{
+			ovrRig.SetActive(true);
 		}
 
 	}
