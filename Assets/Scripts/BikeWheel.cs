@@ -12,7 +12,7 @@ public class BikeWheel : MonoBehaviour
 	private Dictionary<Transform, WheelCollider> _wheelsWithoutSteer = new Dictionary<Transform, WheelCollider>();
 	
 	[Tooltip("Motor torque on the wheel axle expressed in Newton meters.")]
-	private float maxTorque = 60.0f;
+	private float maxTorque = 1200.0f;
 	private float maxSteeringAngle = 30;
 	
 	
