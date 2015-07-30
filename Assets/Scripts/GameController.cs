@@ -44,7 +44,6 @@ public class GameController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-
 		switch(other.tag){
 			case "PickUp": 
 				score = score + scoreFactor; //Für jedes PickUp ein Punktezuwachs
@@ -55,8 +54,12 @@ public class GameController : MonoBehaviour {
 					raceStart = true;
 				}
 				break;
+			case "Terrain":
+				//Ignorieren
+				break;
 			default: 
 				energy = energy - 1;
+				print (other.name);
 				if(energy == 0){
 					gameActive = false;
 					endTime = Time.realtimeSinceStartup - time;

@@ -14,6 +14,7 @@ public class Menu : MonoBehaviour {
 	AutoMove _moveBikeAuto;
 	BikePitch _bikePitch;
 	Handlebars _handlebars;
+	AutoSteer _autoSteer;
 
 	public Toggle toggleMove;
 	public Toggle togglePitch;
@@ -23,38 +24,48 @@ public class Menu : MonoBehaviour {
 
 	public Button endButton;
 
-	Vector3 startPosition;
+	Transform startPosition;
 	// Use this for initialization
 	void Start () {
 		_moveBike = Bike.GetComponent<MoveBike>();
 		_moveBikeAuto = Bike.GetComponent<AutoMove>();
 
 		_bikePitch = BikeBody.GetComponent<BikePitch>();
+
 		_handlebars = Handlebars.GetComponent<Handlebars>();
+		_autoSteer = Handlebars.GetComponent<AutoSteer>();
 
 		toggleMove.isOn = _moveBike.enabled;
 		togglePitch.isOn = _bikePitch.enabled;
 		toggleHandle.isOn = _handlebars.enabled;
 
-		startPosition = Bike.transform.position;
+		startPosition = Bike.transform;
 	}
-	
+	public GameObject ovrRig;
 	// Update is called once per frame
 	void Update () {
 		_moveBike.enabled = toggleMove.isOn;
 		_moveBikeAuto.enabled = !toggleMove.isOn;
 		_bikePitch.enabled = togglePitch.isOn;
 		_handlebars.enabled = toggleHandle.isOn;
+		_autoSteer.enabled = !toggleHandle.isOn;
 
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			userMenu.enabled = !userMenu.enabled;
+		}
+
+		if(userMenu.isActiveAndEnabled){
+			ovrRig.SetActive(false);
+		} else{
+			ovrRig.SetActive(true);
 		}
 
 	}
 
 	public void resetButton(){
 		Debug.Log ("Spiel wird zurückgesetzt");
-		Bike.transform.position = startPosition;
+		Bike.transform.position = startPosition.position;
+		Bike.transform.rotation = startPosition.rotation;
 		PlayerCam.transform.forward = Bike.transform.forward;
 	}
 
