@@ -23,6 +23,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// A head-tracked stereoscopic virtual reality camera rig.
@@ -115,6 +116,9 @@ public class OVRCameraRig : MonoBehaviour
 
 #endregion
 
+	public Toggle rotationEnabled;
+	public Toggle positionEnabled;
+
 	private void UpdateAnchors()
 	{
 		bool monoscopic = OVRManager.instance.monoscopic;
@@ -122,16 +126,22 @@ public class OVRCameraRig : MonoBehaviour
 		OVRPose tracker = OVRManager.tracker.GetPose(0f);
 		OVRPose hmdLeftEye = OVRManager.display.GetEyePose(OVREye.Left);
 		OVRPose hmdRightEye = OVRManager.display.GetEyePose(OVREye.Right);
-
+		
 		trackerAnchor.localRotation = tracker.orientation;
 		centerEyeAnchor.localRotation = hmdLeftEye.orientation; // using left eye for now
-		leftEyeAnchor.localRotation = monoscopic ? centerEyeAnchor.localRotation : hmdLeftEye.orientation;
-		rightEyeAnchor.localRotation = monoscopic ? centerEyeAnchor.localRotation : hmdRightEye.orientation;
+		if(rotationEnabled.isOn){
+			leftEyeAnchor.localRotation = monoscopic ? centerEyeAnchor.localRotation : hmdLeftEye.orientation;
+			rightEyeAnchor.localRotation = monoscopic ? centerEyeAnchor.localRotation : hmdRightEye.orientation;
 
+		}
 		trackerAnchor.localPosition = tracker.position;
-		centerEyeAnchor.localPosition = 0.5f * (hmdLeftEye.position + hmdRightEye.position);
-		leftEyeAnchor.localPosition = monoscopic ? centerEyeAnchor.localPosition : hmdLeftEye.position;
-		rightEyeAnchor.localPosition = monoscopic ? centerEyeAnchor.localPosition : hmdRightEye.position;
+	
+		if(positionEnabled.isOn){
+			centerEyeAnchor.localPosition = 0.5f * (hmdLeftEye.position + hmdRightEye.position);	
+			leftEyeAnchor.localPosition = monoscopic ? centerEyeAnchor.localPosition : hmdLeftEye.position;
+			rightEyeAnchor.localPosition = monoscopic ? centerEyeAnchor.localPosition : hmdRightEye.position;
+
+		}
 
 		if (UpdatedAnchors != null)
 		{

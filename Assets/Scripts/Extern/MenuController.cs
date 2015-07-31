@@ -3,13 +3,16 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour {
 	
 	string name="";
-	string score="";
+	string scores="";
 	List<Scores> highscore;
 	
+	public Text namesText;
+	public Text scoresText;
 	// Use this for initialization
 	void Start () {
 		//EventManager._instance._buttonClick += ButtonClicked;
@@ -38,40 +41,39 @@ public class MenuController : MonoBehaviour {
 		
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("Score :");
-		score =  GUILayout.TextField(score);
+		scores =  GUILayout.TextField(scores);
 		GUILayout.EndHorizontal();
 		
 		if(GUILayout.Button("Add Score"))
 		{
-			HighScoreManager._instance.SaveHighScore(name,System.Int32.Parse(score));
-			highscore = HighScoreManager._instance.GetHighScore();    
+			//Add Score
+			HighScoreManager._instance.SaveHighScore(name,System.Int32.Parse(scores));
+			highscore = HighScoreManager._instance.GetHighScore(); 
+			LoadScore();
 		}
 		
 		if(GUILayout.Button("Get LeaderBoard"))
 		{
-			highscore = HighScoreManager._instance.GetHighScore();            
+			highscore = HighScoreManager._instance.GetHighScore();  
+			LoadScore();
+
 		}
 		
 		if(GUILayout.Button("Clear Leaderboard"))
 		{
-			HighScoreManager._instance.ClearLeaderBoard();            
+			HighScoreManager._instance.ClearLeaderBoard();  
+			LoadScore();
 		}
-		
-		GUILayout.Space(60);
-		
-		GUILayout.BeginHorizontal();
-		GUILayout.Label("Name",GUILayout.Width(Screen.width/2));
-		GUILayout.Label("Scores",GUILayout.Width(Screen.width/2));
-		GUILayout.EndHorizontal();
-		
-		GUILayout.Space(25);
-		
+	
+
+	}
+	void LoadScore(){
+		namesText.text = "";
+		scoresText.text ="";
 		foreach(Scores _score in highscore)
 		{
-			GUILayout.BeginHorizontal();
-			GUILayout.Label(_score.name,GUILayout.Width(Screen.width/2));
-			GUILayout.Label(""+_score.score,GUILayout.Width(Screen.width/2));
-			GUILayout.EndHorizontal();
+			namesText.text = namesText.text + _score.name + "\n";
+			scoresText.text = scoresText.text + _score.score + "\n";
 		}
 	}
 }

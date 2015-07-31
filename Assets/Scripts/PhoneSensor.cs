@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-public class AccSensor : MonoBehaviour{
+public class PhoneSensor : MonoBehaviour{
 
 	Thread receiveThread;
 
@@ -16,25 +16,23 @@ public class AccSensor : MonoBehaviour{
 	public int port;
 	bool stop = false;
 	float grav = 9.81f;
-	Vector3 acceleration;
+	Vector3 gyrodata;
 
-	public Vector3 Acceleration
+	public Vector3 Gyodata
 	{
 		get
 		{	
-			return acceleration;
+			return gyrodata;
 		}
 	}
 	// Use this for initialization
 	void Start () {
-
 		init();
 
 	}
 
 	private void init()
 	{
-		port = 5555;
 		
 		receiveThread = new Thread(new ThreadStart(RecieveData));
 		receiveThread.IsBackground = true;
@@ -55,20 +53,21 @@ public class AccSensor : MonoBehaviour{
 				//Get Bytes
 				IPEndPoint anyIP = new IPEndPoint(IPAddress.Any, 0);
 				byte[] data = client.Receive(ref anyIP);
+				print (data);
 				if (data == null || data.Length == 0)
 					return;
 				string udpString = Encoding.UTF8.GetString(data);
-				//print(">> " + udpString);
+				print(">> " + udpString);
 
 				//Parse and Split string
 				udpString.Trim();
 				string[] exData = udpString.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
 
-				//Load Accelerometer data in new Vector
-				acceleration.x = normStringToFloat(exData[2]);
-				acceleration.y = normStringToFloat(exData[3]);
-				acceleration.z = normStringToFloat(exData[4]);
+				//Load Gyroscope data in new Vector
+				gyrodata.x = normStringToFloat(exData[6]);
+				gyrodata.y = normStringToFloat(exData[7]);
+				gyrodata.z = normStringToFloat(exData[8]);
 
 
 			}
