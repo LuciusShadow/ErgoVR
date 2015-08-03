@@ -7,11 +7,11 @@ public class Handlebars : MonoBehaviour {
 
 	//public GameObject bike;
 	Vector3 bikePosition;
-	int maxAngle = 45;
+	int maxAngle = 10;
 	public Transform body;
 	public WheelCollider frontWheel;
+	public PhoneSensor phone;
 	Vector3 gyroData;
-
 	public GameObject obstacles;
 	// Use this for initialization
 	void Start () {
@@ -23,6 +23,7 @@ public class Handlebars : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		gyroData = phone.Gyodata;
 		if(obstacles.activeSelf == false)
 			obstacles.SetActive(true);
 
@@ -30,11 +31,16 @@ public class Handlebars : MonoBehaviour {
 		//transform.position = new Vector3(bikePosition.x + 2, bikePosition.y + 1, bikePosition.z);
 		//transform.Rotate(this.transform.up, 10 * Time.deltaTime); 
 		//Testing
-		float rotate = accelerometer.Acceleration.y * maxAngle;
-		float steer = 30 * Input.GetAxis("Horizontal");
-		frontWheel.steerAngle = steer;
-		rotate = steer;
-		setEulerAngles(transform.eulerAngles.x, rotate+body.eulerAngles.y, body.eulerAngles.z);
+
+		//float rotate = accelerometer.Acceleration.y * maxAngle;
+		//float steer = 30 * Input.GetAxis("Horizontal");
+		float rotate = -gyroData.z * maxAngle;
+
+		frontWheel.steerAngle = transform.localEulerAngles.y;
+
+
+		transform.Rotate(0,rotate,0);
+		//setEulerAngles(transform.eulerAngles.x, rotate+body.eulerAngles.y, body.eulerAngles.z);
 
 
 	}

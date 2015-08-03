@@ -8,47 +8,53 @@ public class Menu : MonoBehaviour {
     public GameObject Bike;
 	public GameObject BikeBody;
 	public GameObject Handlebars;
+	public GameObject DataHub;
 	public Camera PlayerCam;
 
-	MoveBike _moveBike;
-	AutoMove _moveBikeAuto;
-	BikePitch _bikePitch;
-	Handlebars _handlebars;
-	AutoSteer _autoSteer;
+	MoveBike moveBike;
+	AutoMove moveBikeAuto;
+	BikePitch bikePitch;
+	Handlebars handlebars;
+	AutoSteer autoSteer;
+	VRControl vrControl;
 
 	public Toggle toggleMove;
 	public Toggle togglePitch;
 	public Toggle toggleHandle;
-	public Toggle toggleHorizontalHeadMovement;
-	public Toggle toggleVerticalHeadMovement;
 
 	public Button endButton;
 
 	Transform startPosition;
 	// Use this for initialization
 	void Start () {
-		_moveBike = Bike.GetComponent<MoveBike>();
-		_moveBikeAuto = Bike.GetComponent<AutoMove>();
+		moveBike = Bike.GetComponent<MoveBike>();
+		moveBikeAuto = Bike.GetComponent<AutoMove>();
 
-		_bikePitch = BikeBody.GetComponent<BikePitch>();
+		bikePitch = BikeBody.GetComponent<BikePitch>();
 
-		_handlebars = Handlebars.GetComponent<Handlebars>();
-		_autoSteer = Handlebars.GetComponent<AutoSteer>();
+		handlebars = Handlebars.GetComponent<Handlebars>();
+		autoSteer = Handlebars.GetComponent<AutoSteer>();
 
-		toggleMove.isOn = _moveBike.enabled;
-		togglePitch.isOn = _bikePitch.enabled;
-		toggleHandle.isOn = _handlebars.enabled;
+		vrControl = DataHub.GetComponent<VRControl>();
+
+		toggleMove.isOn = moveBike.enabled;
+		togglePitch.isOn = bikePitch.enabled;
+		toggleHandle.isOn = handlebars.enabled;
+
+
 
 		startPosition = Bike.transform;
 	}
 	public GameObject ovrRig;
 	// Update is called once per frame
 	void Update () {
-		_moveBike.enabled = toggleMove.isOn;
-		_moveBikeAuto.enabled = !toggleMove.isOn;
-		_bikePitch.enabled = togglePitch.isOn;
-		_handlebars.enabled = toggleHandle.isOn;
-		_autoSteer.enabled = !toggleHandle.isOn;
+		moveBike.enabled = toggleMove.isOn;
+		moveBikeAuto.enabled = !toggleMove.isOn;
+		bikePitch.enabled = togglePitch.isOn;
+		handlebars.enabled = toggleHandle.isOn;
+		autoSteer.enabled = !toggleHandle.isOn;
+
+
 
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			userMenu.enabled = !userMenu.enabled;
