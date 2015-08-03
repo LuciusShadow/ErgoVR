@@ -1,8 +1,20 @@
 ﻿//Entommen von https://youtu.be/r5U5O7WncHk
+
+/***********************************************************
+* Dateiname: AutoSteer.cs
+* Autor: Sascha Bach
+* letzte Aenderung: 03.08.2015
+* Inhalt: enthaelt die Implementierung der Klasse AutoSteer
+***********************************************************/
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+/***********************************************************
+* Klasse: AutoSteer
+* Beschreibung: Implementiert autonome Steuerung durch
+* abfahren eines in Unity festgelegten Pfades
+***********************************************************/
 public class AutoSteer : MonoBehaviour {
 	public System.Collections.Generic.List<Transform> path = new System.Collections.Generic.List<Transform>();
 	public Transform body;
@@ -17,7 +29,13 @@ public class AutoSteer : MonoBehaviour {
 	public float dir;
 
 	public GameObject obstacles;
-	// Use this for initialization
+
+	/***********************************************************
+	 * Methode: Start
+	 * Beschreibung: Wandelt die Path-Gruppe in ein Array um
+	 * Parameter: keine
+	 * Rückgabewert: keinen
+	 ***********************************************************/
 	void Start () {
 		Transform[] pathObjects = pathGroup.GetComponentsInChildren<Transform>();
 		path = new List<Transform>();
@@ -27,16 +45,23 @@ public class AutoSteer : MonoBehaviour {
 			if(pathObject != pathGroup){
 				path.Add(pathObject);
 			}
-			
-			
 		}
 	}
 
-	// Update is called once per frame
+	/***********************************************************
+	 * Methode: Update
+	 * Beschreibung: Sucht nächstes Element des Path-Arrays,
+	 * fährt dieses an und fokussiert anschließend das 
+	 * darauffolgende Element
+	 * Parameter: keine
+	 * Rückgabewert: keinen
+	 ***********************************************************/
 	void Update () {
+		//Steuere Hindernisserscheinung
 		if(obstacles.activeSelf == true)
 			obstacles.SetActive(false);
 
+		//Berechnung des Vektrors zum Zielobjekt
 		Vector3 steerVector = transform.InverseTransformPoint(new Vector3(path[currentPathObject].position.x, 
 		                                                                  transform.position.y, 
 		                                                                  path[currentPathObject].position.z));
@@ -45,8 +70,8 @@ public class AutoSteer : MonoBehaviour {
 		frontWheel.steerAngle = newSteer;
 		float rotate = newSteer;
 		//Visuelle Lenkbewegung
-		setEulerAngles(transform.eulerAngles.x, rotate+body.eulerAngles.y, body.eulerAngles.z);
-
+		SetEulerAngles(transform.eulerAngles.x, rotate+body.eulerAngles.y, body.eulerAngles.z);
+		//Wenn nah genug am Objekt, wähle nächstes Pfadobjekt
 		if (steerVector.magnitude <= distanceFromPath){
 			currentPathObject++;
 			if(currentPathObject >= path.Count)
@@ -54,7 +79,13 @@ public class AutoSteer : MonoBehaviour {
 		}
 	}
 
-	void setEulerAngles(float x, float y, float z){
+	/***********************************************************
+	 * Methode: SetEulerAngles
+	 * Beschreibung: Setzt die lokalen Winkel
+	 * Parameter: float x, float y, float z
+	 * Rückgabewert: keinen
+	 ***********************************************************/
+	void SetEulerAngles(float x, float y, float z){
 		transform.eulerAngles = new Vector3(x,	y,	z);
 	}
 

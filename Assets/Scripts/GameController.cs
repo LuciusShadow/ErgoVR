@@ -1,42 +1,51 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿/***********************************************************
+* Dateiname: GameController.cs
+* Autor: Sascha Bach
+* letzte Aenderung: 03.08.2015
+* Inhalt: enthaelt die Implementierung der Klasse GameController
+***********************************************************/
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
 
-
+/***********************************************************
+* Klasse: GameController
+* Beschreibung: Steuert HUD-Anzeigen, Highscore und 
+* Abbruchbedingungen für das Spiel
+***********************************************************/
 public class GameController : MonoBehaviour {
-	public GUIStyle mystyle;
-	public Text hud;
 
-	public Text goText;
+	public Text hud;		//HUD-Anzeige für Punkte und Leben
+	public Text goText;		//Game Over Anzeige
 
-	public int score;
-	public int scoreFactor = 5;
-	private int bonus = 7000;
+	public int score;		//Aktueller Punktestand
+	public int lab;			//Aktuelle Runde
+	public int energy = 3;	//Aktuelle Lebenspunkte
 
-	public int lab;
+	float time;				//Spielzeit seit Start
+	float endTime;			//Benötigte Gesamtzeit
+	
+	bool gameActive = false;//Steuervariable 
+	bool raceStart = false; //Ist wahr sobald Spieler Startlinie überfährt
+	
+	int scoreFactor;		//Punktesteigerung pro Item
 
-	public int energy = 3;
-	bool gameActive = false;
-
-	bool raceStart = false;
-
-	float time;
-	float endTime;
-
-	string name="";
-
+	//Variablen für Highscoreanzeige und Verwaltung
 	List<Scores> highscore;
 	public Text namesText;
 	public Text scoresText;
 	public Text userName;
 	
-	// Use this for initialization
+	/***********************************************************
+	 * Methode: Start
+	 * Beschreibung: Initalisiert globale Variablen
+	 * Parameter: keine
+	 * Rückgabewert: keiner
+	 ***********************************************************/
 	void Start () {
 		highscore = new List<Scores>();
-
 		goText.enabled = false;
 		lab = lab + 1;
 		score = 0;
@@ -46,22 +55,31 @@ public class GameController : MonoBehaviour {
 		Physics.IgnoreLayerCollision(9,10);
 	}
 	
-	// Update is called once per frame
+	/***********************************************************
+	 * Methode: Update
+	 * Beschreibung: Wird in jedem Frame aufgerufen. Reagiert
+	 * auf Abbruchbedingungen, passt Lebensanzeige und Punkte
+	 * an
+	 * Parameter: keine
+	 * Rückgabewert: keinen
+	 ***********************************************************/
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Escape)){
+		if(Input.GetKeyDown(KeyCode.Escape))
 			gameActive = !gameActive;
 
-		}
+		//Freeze/Defreeze des Spiels
 		if(gameActive){
 			Time.timeScale = 1;
 			goText.enabled = false;
 		}
 		else Time.timeScale = 0;
 
+		//HUD Anzeige
 		if(raceStart && gameActive){
 			hud.text = "Score: "+score+" Health: " + energy + " Time: " + (Time.realtimeSinceStartup - time).ToString("0.00");
 		}
 
+		//Game Over Anzeige
 		if(energy <= 0 ){
 			time = Time.realtimeSinceStartup - time;
 			if(!gameActive){
@@ -73,6 +91,12 @@ public class GameController : MonoBehaviour {
 			
 	}
 
+	/***********************************************************
+	 * Methode: OnTriggerEnter
+	 * Beschreibung: Steuert die Kollisionsbehandlung
+	 * Parameter: Collider other
+	 * Rückgabewert: keinen
+	 ***********************************************************/
 	void OnTriggerEnter(Collider other){
 		switch(other.tag){
 			case "PickUp": 
@@ -82,10 +106,13 @@ public class GameController : MonoBehaviour {
 				if(time == 0){
 					time = Time.realtimeSinceStartup;
 					raceStart = true;
+					lab = lab - 1;
+				if(lab == 0)
+					gameActive = false;
 				}
 				break;
 			case "Terrain":
-				//Ignorieren
+				//Kollisionen mit dem Terrain soll ignoriert werden
 				break;
 			default: 
 				energy = energy - 1;
@@ -96,12 +123,17 @@ public class GameController : MonoBehaviour {
 					Time.timeScale = 0;
 					name = userName.text;
 					AddScore();
-				}
+				} 
 				break;
 		}
 	}
 
-
+	/***********************************************************
+	 * Methode: LoadScore
+	 * Beschreibung: Lädt die Highscoredaten aus der Prefs-Datei
+	 * Parameter: keine
+	 * Rückgabewert: keinen
+	 ***********************************************************/
 	public void LoadScore(){
 		highscore = HighScoreManager._instance.GetHighScore();
 		namesText.text = "";
@@ -113,29 +145,26 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	/***********************************************************
+	 * Methode: AddScore
+	 * Beschreibung: Fügt den Punktestand in die Prefs-Datei
+	 * Parameter: keine
+	 * Rückgabewert: keinen
+	 ***********************************************************/
 	void AddScore(){
 		//Add Score
 		HighScoreManager._instance.SaveHighScore(name,System.Int32.Parse(score.ToString())); 
 		LoadScore();
 	}
 
-	public void deleteScore(){
+	/***********************************************************
+	 * Methode: DeleteScore
+	 * Beschreibung: Löscht die HighScore-Daten
+	 * Parameter: keine
+	 * Rückgabewert: keinen
+	 ***********************************************************/
+	public void DeleteScore(){
 		HighScoreManager._instance.ClearLeaderBoard();
 		LoadScore();
 	}
-//	void OnGUI(){
-////		print ("Race: "+raceStart + " " + "Game: " + gameActive);
-//		if(raceStart && gameActive)
-//		//GUI.Label (new Rect(10,10,400,20), "Score: "+score+" Health: " + energy + " Time: " + (Time.realtimeSinceStartup - time).ToString("0.00"));
-//		hud.GetComponent<Text>().text = "Score: "+score+" Health: " + energy + " Time: " + (Time.realtimeSinceStartup - time).ToString("0.00");
-//
-//		if(energy <= 0 ){
-//			time = Time.realtimeSinceStartup - time;
-//			if(!gameActive)
-//			GUI.Label (new Rect(Screen.width - 600, Screen.height - 250,400,20), 
-//				           "Game Over! \n Zeit: " + endTime.ToString("0.00") + " Sekunden \n Erzielte Punkte: " + score, mystyle);
-//
-//		}
-//
-//	}
 }

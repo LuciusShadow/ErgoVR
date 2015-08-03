@@ -1,16 +1,25 @@
-﻿using UnityEngine;
-using System.Collections;
-
+﻿/***********************************************************
+* Dateiname: PhoneSensor.cs
+* Autor: Sascha Bach
+* letzte Aenderung: 03.08.2015
+* Inhalt: enthaelt die Implementierung der Klasse PathScript
+***********************************************************/
+using UnityEngine;
 using System;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Collections;
 
+/***********************************************************
+* Klasse: PhoneSensor
+* Beschreibung: Verarbeitet die Gyroskopdaten des Smartphones
+* am Lenker
+***********************************************************/
 public class PhoneSensor : MonoBehaviour{
 
 	Thread receiveThread;
-
 	UdpClient client;
 
 	public int port;
@@ -18,19 +27,32 @@ public class PhoneSensor : MonoBehaviour{
 	float grav = 9.81f;
 	Vector3 gyrodata;
 
-	public Vector3 Gyodata
+	//Getter der Gyrodaten
+	public Vector3 Gyrodata
 	{
 		get
 		{	
 			return gyrodata;
 		}
 	}
-	// Use this for initialization
+	/***********************************************************
+	 * Methode: Start
+	 * Beschreibung: Aufruf von init()
+	 * Parameter: keine
+	 * Rückgabewert: keiner
+	 ***********************************************************/
 	void Start () {
 		init();
 
 	}
 
+	/***********************************************************
+	 * Methode: init
+	 * Beschreibung: Initialisierung des Threads für 
+	 * Gyroskopdatenempfang
+	 * Parameter: keine
+	 * Rückgabewert: keiner
+	 ***********************************************************/
 	private void init()
 	{
 		
@@ -39,7 +61,13 @@ public class PhoneSensor : MonoBehaviour{
 		receiveThread.Start();
 	}
 
-
+	/***********************************************************
+	 * Methode: ReceiveData
+	 * Beschreibung: Empfängt die UDP-Packete des Smartphones
+	 * über WLAN
+	 * Parameter: keine
+	 * Rückgabewert: keiner
+	 ***********************************************************/
 	private void RecieveData()
 	{
 
@@ -50,26 +78,27 @@ public class PhoneSensor : MonoBehaviour{
 			if(stop)return;
 			try
 			{
-				//Get Bytes
+				//Empfange Bytes
 				IPEndPoint anyIP = new IPEndPoint(IPAddress.Any, 0);
 				byte[] data = client.Receive(ref anyIP);
-				print (data);
+
+				//print (data);
+
 				if (data == null || data.Length == 0)
 					return;
+
 				string udpString = Encoding.UTF8.GetString(data);
 				print(">> " + udpString);
 
-				//Parse and Split string
+				//Parsen und splitten des Strings
 				udpString.Trim();
 				string[] exData = udpString.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
 
-				//Load Gyroscope data in new Vector
-				gyrodata.x = normStringToFloat(exData[6]);
-				gyrodata.y = normStringToFloat(exData[7]);
-				gyrodata.z = normStringToFloat(exData[8]);
-
-
+				//Lade Gyroskopdaten in Vektor
+				gyrodata.x = NormStringToFloat(exData[6]);
+				gyrodata.y = NormStringToFloat(exData[7]);
+				gyrodata.z = NormStringToFloat(exData[8]);
 			}
 			catch (Exception err)
 			{
@@ -78,11 +107,23 @@ public class PhoneSensor : MonoBehaviour{
 		}
 	}
 
-	private float normStringToFloat(string value)
+	/***********************************************************
+	 * Methode: NormStringToFloat
+	 * Beschreibung: Konvertiert String in Float
+	 * Parameter: String value
+	 * Rückgabewert: float value
+	 ***********************************************************/
+	private float NormStringToFloat(string value)
 	{
 		return float.Parse(value)/grav;
 	}
 
+	/***********************************************************
+	 * Methode: OnApplicationQuit
+	 * Beschreibung: Stoppt den RecieveThread
+	 * Parameter: -
+	 * Rückgabewert: -
+	 ***********************************************************/
 	public void OnApplicationQuit() {
 
 		stop = true;
@@ -90,7 +131,12 @@ public class PhoneSensor : MonoBehaviour{
 	}
 
 	
-	// Update is called once per frame
+	/***********************************************************
+	 * Methode: Update
+	 * Beschreibung: Verwendet für Debug Code
+	 * Parameter: -
+	 * Rückgabewert: -
+	 ***********************************************************/
 	void Update () {
 		//print (acceleration.x + " " + acceleration.y + " " + acceleration.z);
 		//print ("Count: " + count + " Zeit: " + Time.realtimeSinceStartup);

@@ -1,7 +1,18 @@
-﻿using UnityEngine;
+﻿/***********************************************************
+* Dateiname: Menu.cs
+* Autor: Sascha Bach
+* letzte Aenderung: 03.08.2015
+* Inhalt: enthaelt die Implementierung der Klasse Menu
+***********************************************************/
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
+/***********************************************************
+* Klasse: Menu
+* Beschreibung: Steuert die Aktivierung bzw. Deaktivierung
+* von Modulen anhand der Menueeingaben
+***********************************************************/
 public class Menu : MonoBehaviour {
 	public Canvas userMenu;
 
@@ -25,7 +36,16 @@ public class Menu : MonoBehaviour {
 	public Button endButton;
 
 	Transform startPosition;
-	// Use this for initialization
+
+	public GameObject ovrRig;
+
+	/***********************************************************
+	 * Methode: Start
+	 * Beschreibung: Initialisierung der Skriptreferenzen und
+	 * Checkboxstatus
+	 * Parameter: keine
+	 * Rückgabewert: keiner
+	 ***********************************************************/
 	void Start () {
 		moveBike = Bike.GetComponent<MoveBike>();
 		moveBikeAuto = Bike.GetComponent<AutoMove>();
@@ -41,13 +61,18 @@ public class Menu : MonoBehaviour {
 		togglePitch.isOn = bikePitch.enabled;
 		toggleHandle.isOn = handlebars.enabled;
 
-
-
 		startPosition = Bike.transform;
 	}
-	public GameObject ovrRig;
-	// Update is called once per frame
+
+	/***********************************************************
+	 * Methode: Update
+	 * Beschreibung: Skripte werden je nach Checkboxeinstellung
+	 * Deaktiviert oder Aktiviert
+	 * Parameter: keine
+	 * Rückgabewert: keinen
+	 ***********************************************************/
 	void Update () {
+		//Wende Checkbox auf Skript an (Aktiv oder Inaktiv)
 		moveBike.enabled = toggleMove.isOn;
 		moveBikeAuto.enabled = !toggleMove.isOn;
 		bikePitch.enabled = togglePitch.isOn;
@@ -55,11 +80,11 @@ public class Menu : MonoBehaviour {
 		autoSteer.enabled = !toggleHandle.isOn;
 
 
-
+		//Escape Taste um ins Menü zu gelangen
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			userMenu.enabled = !userMenu.enabled;
 		}
-
+		//Wenn Menue aktiv deaktiviere VR-Ansicht für Menueanzeige
 		if(userMenu.isActiveAndEnabled){
 			ovrRig.SetActive(false);
 		} else{
@@ -68,19 +93,35 @@ public class Menu : MonoBehaviour {
 
 	}
 
-	public void resetButton(){
-		Debug.Log ("Spiel wird zurückgesetzt");
-		Bike.transform.position = startPosition.position;
-		Bike.transform.rotation = startPosition.rotation;
-		PlayerCam.transform.forward = Bike.transform.forward;
+	/***********************************************************
+	 * Methode: ResetButton
+	 * Beschreibung: Startet das Spiel neu
+	 * Parameter: keine
+	 * Rückgabewert: keinen
+	 ***********************************************************/
+	public void ResetButton(){
+		Application.LoadLevel(0);
 	}
 
-	public void endGameButton(){
+	/***********************************************************
+	 * Methode: EndGameButton
+	 * Beschreibung: Beendet das Spiel
+	 * Parameter: keine
+	 * Rückgabewert: keinen
+	 ***********************************************************/
+	public void EndGameButton(){
 		Debug.Log ("Spiel wird geschlossen");
 		Application.Quit ();
 	}
 
-	public void startGameButton(){
+	/***********************************************************
+	 * Methode: StartGameButton
+	 * Beschreibung: Startet das Spiel durch Schließen des
+	 * Menues
+	 * Parameter: keine
+	 * Rückgabewert: keinen
+	 ***********************************************************/
+	public void StartGameButton(){
 		userMenu.enabled = !userMenu.enabled;
 	}
 

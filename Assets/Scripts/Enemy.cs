@@ -13,10 +13,10 @@ public class Enemy : MonoBehaviour {
 	public int decSpeed = 20;
 	public GameObject bike; //Hierüber Script referenzieren das Collision und Powerup erkennt
 
-	bool bikePickUP;
+
 	// Use this for initialization
 	void Start () {
-		bikePickUP = false;
+
 	}
 	
 	// Update is called once per frame

@@ -1,7 +1,7 @@
 ﻿/***********************************************************
  * Dateiname: SerialPortScript.cs
  * Autor: Sascha Bach
- * letzte Aenderung: 19.06.2015
+ * letzte Aenderung: 03.08.2015
  * Inhalt: enthaelt die Implementierung der Klasse SerialPortScript
  ***********************************************************/
 
@@ -104,17 +104,6 @@ public class SerialPortScript : MonoBehaviour {
 		receiveThread.Start();
 	}
 
-
-/***********************************************************
- * Methode: Update
- * Beschreibung: Wird in jedem Frame aufgerufen
- * Parameter: keine
- * Rückgabewert: keinen
- ***********************************************************/
-	void Update(){
-//		print ("Count: " + count + " Zeit: " + Time.realtimeSinceStartup);
-	}
-
 /***********************************************************
  * Methode: recieveData
  * Beschreibung: Empfängt Daten, die vom SensorTag an den
@@ -123,12 +112,13 @@ public class SerialPortScript : MonoBehaviour {
  * Rückgabewert: keinen
  ***********************************************************/
 	private void RecieveDataPedal () {
+		#region Debugging Code for logging
 //		string filePath = "E:\\log2.csv";
 //		if (!File.Exists(filePath)){
 //			File.Create(filePath).Close();
 //		}
 //		string delimiter = ",";
-
+		#endregion
 		byte inputByte;		
 		sbyte byteVal = 0;
 		string gValue ="";
@@ -184,33 +174,34 @@ public class SerialPortScript : MonoBehaviour {
 							byteVal = Convert.ToSByte(gValue, 16); 
 
 						}//end for
-					switch(axis){
-						case 'x': 
-							xData = byteVal/gFactor;
-							break;
-						case 'y': 
-							yData = byteVal/gFactor;
-							count++;
-							break;
-						case 'z': 
-							zData = byteVal/gFactor;
-							break;
-						default:
-							break;
-					}
-					if(axis != '0'){
+						switch(axis){
+							case 'x': 
+								xData = byteVal/gFactor;
+								break;
+							case 'y': 
+								yData = byteVal/gFactor;
+								count++;
+								break;
+							case 'z': 
+								zData = byteVal/gFactor;
+								break;
+							default:
+								break;
+						}
+					#region Debugging Code
+//					if(axis != '0'){
 //						File.AppendAllText(filePath, Convert.ToString(byteVal/gFactor)+delimiter+"\r\n");
 //						sb.Append(incData); // Debug Code
-						//Debug.Log ( "in hex: " + gValue + " in Byte: " + byteVal + " G auf Achse " + axis + ": " + byteVal/gFactor);
-					}
-
-						//Convert.ToString (Convert.ToInt32(value,16),2).PadLeft (value.Length * 4, '0') 
-						
-						
-						//if(incData.Equals(Convert.ToString(eventByte, 16).PadLeft(2, '0').PadRight(3, ' ')))
-						
-						//Debug.Log("Received: " + sb.ToString());
-
+//						Debug.Log ( "in hex: " + gValue + " in Byte: " + byteVal + " G auf Achse " + axis + ": " + byteVal/gFactor);
+//					}
+//
+//						Convert.ToString (Convert.ToInt32(value,16),2).PadLeft (value.Length * 4, '0') 
+//						
+//						
+//						if(incData.Equals(Convert.ToString(eventByte, 16).PadLeft(2, '0').PadRight(3, ' ')))
+//						
+//						Debug.Log("Received: " + sb.ToString());
+					#endregion
 						
 					} 
 					catch(TimeoutException){}
@@ -218,10 +209,6 @@ public class SerialPortScript : MonoBehaviour {
 						print ("System.Exception in serial.ReadLine: " + e.ToString ());
 					}
 
-			}
-			else {
-				
-				//port.DiscardInBuffer();
 			}
 		}//while end
 
