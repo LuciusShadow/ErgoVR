@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+
 
 public class GameController : MonoBehaviour {
 	public GUIStyle mystyle;
@@ -23,11 +27,11 @@ public class GameController : MonoBehaviour {
 	float endTime;
 
 	string name="";
-	string scores="";
-	List<Scores> highscore;
 
+	List<Scores> highscore;
 	public Text namesText;
 	public Text scoresText;
+	public Text userName;
 	
 	// Use this for initialization
 	void Start () {
@@ -90,13 +94,16 @@ public class GameController : MonoBehaviour {
 					gameActive = false;
 					endTime = Time.realtimeSinceStartup - time;
 					Time.timeScale = 0;
+					name = userName.text;
+					AddScore();
 				}
 				break;
 		}
 	}
 
 
-	void LoadScore(){
+	public void LoadScore(){
+		highscore = HighScoreManager._instance.GetHighScore();
 		namesText.text = "";
 		scoresText.text ="";
 		foreach(Scores _score in highscore)
@@ -106,6 +113,16 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	void AddScore(){
+		//Add Score
+		HighScoreManager._instance.SaveHighScore(name,System.Int32.Parse(score.ToString())); 
+		LoadScore();
+	}
+
+	public void deleteScore(){
+		HighScoreManager._instance.ClearLeaderBoard();
+		LoadScore();
+	}
 //	void OnGUI(){
 ////		print ("Race: "+raceStart + " " + "Game: " + gameActive);
 //		if(raceStart && gameActive)
