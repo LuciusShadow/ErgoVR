@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour {
 	bool gameActive = false;//Steuervariable 
 	bool raceStart = false; //Ist wahr sobald Spieler Startlinie überfährt
 	
-	int scoreFactor;		//Punktesteigerung pro Item
+	int scoreFactor = 5;		//Punktesteigerung pro Item
 
 	//Variablen für Highscoreanzeige und Verwaltung
 	List<Scores> highscore;

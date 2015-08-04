@@ -26,8 +26,10 @@ public class PickUpPickedUp : MonoBehaviour {
 		if(other.tag == "Player"){
 
 			gameObject.GetComponent<MeshRenderer>().enabled = false;
+			gameObject.GetComponent<BoxCollider>().enabled = false;
 			yield return new WaitForSeconds(15);
 			gameObject.GetComponent<MeshRenderer>().enabled = true;
+			gameObject.GetComponent<BoxCollider>().enabled = true;
 		}
 			 
 		
