@@ -67,12 +67,12 @@ public class BikePitch : MonoBehaviour {
 		//Anwendung der Neigung auf bis maximal 30 Grad
 		if(Mathf.Abs(pitch) <= 30f)
 			//transform.RotateAround(rotationPoint.position, transform.forward, pitch);
-			setEulerAngles(transform.eulerAngles.x, -180 + bike.transform.rotation.eulerAngles.y, 0 -pitch);
-			//else
-			//transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0,90,0),turnSpeed*Time.deltaTime);
+			SetEulerAngles(transform.eulerAngles.x, -180 + bike.transform.rotation.eulerAngles.y, 0 -pitch);
+			else
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0,90,0),turnSpeed*Time.deltaTime);
 	}
 
-	void setEulerAngles(float x, float y, float z){
+	void SetEulerAngles(float x, float y, float z){
 		transform.eulerAngles = new Vector3(x,	y,	z);
 	}
 }

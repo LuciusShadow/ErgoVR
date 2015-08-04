@@ -16,7 +16,7 @@ using System.Collections.Generic;
 * abfahren eines in Unity festgelegten Pfades
 ***********************************************************/
 public class AutoSteer : MonoBehaviour {
-	public System.Collections.Generic.List<Transform> path = new System.Collections.Generic.List<Transform>();
+	System.Collections.Generic.List<Transform> path = new System.Collections.Generic.List<Transform>();
 	public Transform body;
 	public Transform pathGroup;
 
@@ -70,7 +70,12 @@ public class AutoSteer : MonoBehaviour {
 		frontWheel.steerAngle = newSteer;
 		float rotate = newSteer;
 		//Visuelle Lenkbewegung
-		SetEulerAngles(transform.eulerAngles.x, rotate+body.eulerAngles.y, body.eulerAngles.z);
+		//SetEulerAngles(transform.eulerAngles.x, rotate+body.eulerAngles.y, body.eulerAngles.z);
+		transform.rotation = Quaternion.RotateTowards(transform.rotation, 
+		                                              Quaternion.Euler(transform.eulerAngles.x,
+		                                                               rotate+body.eulerAngles.y,
+		                 												body.eulerAngles.z),
+		                                              40*Time.deltaTime);
 		//Wenn nah genug am Objekt, wähle nächstes Pfadobjekt
 		if (steerVector.magnitude <= distanceFromPath){
 			currentPathObject++;
