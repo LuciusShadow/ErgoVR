@@ -39,6 +39,11 @@ public class Menu : MonoBehaviour {
 
 	public GameObject ovrRig;
 
+	public GameObject stones;
+	public GameObject autoPickUps;
+	public GameObject regularPickUps;
+	public GameObject birds;
+
 	/***********************************************************
 	 * Methode: Start
 	 * Beschreibung: Initialisierung der Skriptreferenzen und
@@ -79,17 +84,23 @@ public class Menu : MonoBehaviour {
 		handlebars.enabled = toggleHandle.isOn;
 		autoSteer.enabled = !toggleHandle.isOn;
 
-
+		//Steuerung der Objekte
+		stones.SetActive(handlebars.enabled);
+		autoPickUps.SetActive(autoSteer.enabled);
+		regularPickUps.SetActive(handlebars.enabled);
+		birds.SetActive(moveBike.enabled);
 		//Escape Taste um ins Menü zu gelangen
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			userMenu.enabled = !userMenu.enabled;
 		}
-		//Wenn Menue aktiv deaktiviere VR-Ansicht für Menueanzeige
+		//Wenn Menü aktiv deaktiviere VR-Ansicht für Menüanzeige
 		if(userMenu.isActiveAndEnabled){
 			ovrRig.SetActive(false);
 		} else{
 			ovrRig.SetActive(true);
 		}
+
+
 
 	}
 

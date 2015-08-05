@@ -61,7 +61,7 @@ public class AutoSteer : MonoBehaviour {
 		if(obstacles.activeSelf == true)
 			obstacles.SetActive(false);
 
-		//Berechnung des Vektrors zum Zielobjekt
+		//Berechnung des Vektors zum Zielobjekt
 		Vector3 steerVector = transform.InverseTransformPoint(new Vector3(path[currentPathObject].position.x, 
 		                                                                  transform.position.y, 
 		                                                                  path[currentPathObject].position.z));
