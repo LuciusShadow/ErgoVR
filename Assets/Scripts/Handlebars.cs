@@ -59,7 +59,7 @@ public class Handlebars : MonoBehaviour {
 		//float steer = 30 * Input.GetAxis("Horizontal");
 		#endregion
 
-		float rotate = -gyroData.z * maxAngle;
+		float rotate = -gyroData.y * maxAngle;
 		frontWheel.steerAngle = transform.localEulerAngles.y; //Winkel des Wheelcolliders
 		transform.Rotate(0,rotate,0);						  //Winkel des Modells
 		//setEulerAngles(transform.eulerAngles.x, rotate+body.eulerAngles.y, body.eulerAngles.z);

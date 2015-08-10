@@ -1,7 +1,7 @@
 ﻿/***********************************************************
 * Dateiname: VRControl.cs
 * Autor: Sascha Bach
-* letzte Aenderung: 03.08.2015
+* letzte Aenderung: 10.08.2015
 * Inhalt: enthaelt die Implementierung der Klasse VRControl
 ***********************************************************/
 using UnityEngine;
@@ -87,7 +87,7 @@ public class VRControl : MonoBehaviour {
 		Vector3 ovrAcc = new Vector3(0,0,0);
 		if(xTracking || yTracking){
 			ovrAcc = OVRManager.display.acceleration;
-			yFactor = CamCenter.localPosition.y*5;
+			yFactor = CamCenter.localPosition.y*10;
 
 		}
 			

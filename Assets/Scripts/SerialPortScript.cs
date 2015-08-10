@@ -276,8 +276,7 @@ public class SerialPortScript : MonoBehaviour {
 		//Beende Verbindung
 		byte[] disconnect = { 0x01, 0x0A, 0xFE, 0x03, 0x00, 0x00, 0x13 };
 		SendByte(disconnect);
-		SendByte(new byte[]{0x01, 0x0A, 0xFE, 0x03, 0x01, 0x00, 0x13});
-		SendByte(disconnect);
+
 		port.Close();
 		
 		print ("Port geschlossen");

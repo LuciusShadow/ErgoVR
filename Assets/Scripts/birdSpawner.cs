@@ -26,7 +26,7 @@ public class birdSpawner : MonoBehaviour {
 		Vector3 distanceVector = transform.InverseTransformPoint(new Vector3(player.position.x, 
 		                                                                  transform.position.y, 
 		                                                                  player.position.z));
-		print (distanceVector.magnitude);
+
 		if(distanceVector.magnitude < 100){
 			if(spawn == false)StartCoroutine(SpawnWaves());
 			spawn = true;

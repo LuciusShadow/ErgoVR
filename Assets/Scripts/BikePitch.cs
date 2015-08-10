@@ -1,7 +1,8 @@
-﻿/***********************************************************
+﻿
+/***********************************************************
 * Dateiname: BikePitch.cs
 * Autor: Sascha Bach
-* letzte Aenderung: 03.08.2015
+* letzte Aenderung: 10.08.2015
 * Inhalt: enthaelt die Implementierung der Klasse BikePitch
 ***********************************************************/
 using UnityEngine;
@@ -15,7 +16,7 @@ using System.Collections;
 public class BikePitch : MonoBehaviour {
 
 	public float turnSpeed = 100;  //Rotationsgeschwindigkeit
-	public float maxRotation = 30; //Maximaler Winkel
+	public float maxRotation = 40; //Maximale Rotation
 	public GameObject bike;
 
 	float pitch;				   
@@ -65,8 +66,9 @@ public class BikePitch : MonoBehaviour {
 		//transform.rotation =  Quaternion.Euler(transform.rotation.x,-bike.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
 		//Anwendung der Neigung auf bis maximal 30 Grad
-		if(Mathf.Abs(pitch) <= 30f)
+		if(Mathf.Abs(pitch) <= 20f) 
 			//transform.RotateAround(rotationPoint.position, transform.forward, pitch);
+			//transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0,-180 + bike.transform.rotation.eulerAngles.y,0),turnSpeed*Time.deltaTime);
 			SetEulerAngles(transform.eulerAngles.x, -180 + bike.transform.rotation.eulerAngles.y, 0 -pitch);
 			else
 			transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0,90,0),turnSpeed*Time.deltaTime);

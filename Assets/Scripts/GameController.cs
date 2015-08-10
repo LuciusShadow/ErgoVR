@@ -28,6 +28,18 @@ public class GameController : MonoBehaviour {
 	float endTime;			//Benötigte Gesamtzeit
 	
 	bool gameActive = false;//Steuervariable 
+	public bool GameActive
+	{
+		get
+		{
+			return gameActive;
+		}
+		
+		set
+		{
+			gameActive = value;
+		}
+	}
 	bool raceStart = false; //Ist wahr sobald Spieler Startlinie überfährt
 	
 	int scoreFactor = 5;		//Punktesteigerung pro Item
@@ -120,7 +132,7 @@ public class GameController : MonoBehaviour {
 				if(energy == 0){
 					gameActive = false;
 					endTime = Time.realtimeSinceStartup - time;
-					Time.timeScale = 0;
+					//Time.timeScale = 0;
 					name = userName.text;
 					AddScore();
 				} 

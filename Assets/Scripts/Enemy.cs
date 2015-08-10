@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour {
 	float moveSpeed;
 	public int maxSpeed = 50;
 	public int decSpeed = 20;
+
 	public GameObject bike; //Hierüber Script referenzieren das Collision und Powerup erkennt
 
 
