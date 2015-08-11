@@ -12,7 +12,7 @@ using System.Collections;
 * Beschreibung: Steuert Verhalten bei Spielerkollision
 ***********************************************************/
 public class PickUpPickedUp : MonoBehaviour {
-
+	public AudioClip pickUpSound;
 	/***********************************************************
 	 * Methode: OnTriggerEnter
 	 * Beschreibung: Bei Kollision mit Spieler wird das Objekt
@@ -27,6 +27,7 @@ public class PickUpPickedUp : MonoBehaviour {
 
 			gameObject.GetComponent<MeshRenderer>().enabled = false;
 			gameObject.GetComponent<BoxCollider>().enabled = false;
+			AudioSource.PlayClipAtPoint(pickUpSound, new Vector3(0,0,0));
 			yield return new WaitForSeconds(15);
 			gameObject.GetComponent<MeshRenderer>().enabled = true;
 			gameObject.GetComponent<BoxCollider>().enabled = true;

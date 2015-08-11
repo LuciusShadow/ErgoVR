@@ -133,7 +133,9 @@ public class Menu : MonoBehaviour {
 	 * Rückgabewert: keinen
 	 ***********************************************************/
 	public void StartGameButton(){
-		userMenu.enabled = !userMenu.enabled;
+		userMenu.enabled = false;
+		Time.timeScale = 1;
+		Bike.GetComponent<GameController>().GameActive = true;
 	}
 
 

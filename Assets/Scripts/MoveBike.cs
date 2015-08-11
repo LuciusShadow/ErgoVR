@@ -1,7 +1,7 @@
 /***********************************************************
 * Dateiname: MoveBike.cs
 * Autor: Sascha Bach
-* letzte Aenderung: 03.08.2015
+* letzte Aenderung: 10.08.2015
 * Inhalt: enthaelt die Implementierung der Klasse MoveBike
 ***********************************************************/
 using UnityEngine;
@@ -41,14 +41,14 @@ public class MoveBike : MonoBehaviour {
 	 ***********************************************************/
 	void FixedUpdate () {
 		
-		float weight = 72f;										//Pauschal angenommenes Personengewicht
+		float weight = 60f;										//Pauschal angenommenes Personengewicht
 		weight = weight * 10; 									//Umrechnen in Newton
 		float vx = Mathf.Abs(accelerometer.Acceleration.x);		
 		float vz = Mathf.Abs(accelerometer.Acceleration.z);
 		float force = 0f;
 		//Example values in cm (Genaue Werte am Fahrrad ausmessen)
 		int pedalr = 10;
-		int frontTeethr = 15;
+		int frontTeethr = 20;
 		int rearTeethr = 5;
 
 		float torque = 0;
@@ -59,12 +59,11 @@ public class MoveBike : MonoBehaviour {
 		if(v > 1.2f){
 			force =  weight * v * pedalr;
 		}
-		
 		//Hinteres Zahnrad * (Kraft / vorderes Zahnrad)
 		torque = rearTeethr * (force / frontTeethr);
 		//Kompensieren der Masseeinstellungen im Editor
 		torque = torque * Time.deltaTime;
-		
+
 		//Umkippen des Rades vermeiden, setze Winkel um z auf Konstant null
 		bike.transform.eulerAngles = new Vector3(
 			bike.transform.eulerAngles.x,
@@ -73,7 +72,11 @@ public class MoveBike : MonoBehaviour {
 			);
 
 			//Zu Testzwecken kann auch ohne den Sensor mit den Pfeiltasten beschleunigt werden
-			rearWheel.motorTorque = Input.GetAxis("Vertical") * 60;
-			frontWheel.motorTorque = Input.GetAxis("Vertical") * 60;
-		}
+//			rearWheel.motorTorque = Input.GetAxis("Vertical") * 60;
+//			frontWheel.motorTorque = Input.GetAxis("Vertical") * 60;
+
+			//Umsetzung des Drehmoments
+			rearWheel.motorTorque = torque;
+			frontWheel.motorTorque = torque;
+	}
 }

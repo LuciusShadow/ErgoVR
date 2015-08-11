@@ -20,7 +20,7 @@ public class AutoSteer : MonoBehaviour {
 	public Transform body;
 	public Transform pathGroup;
 
-	public float maxSteer = 30.0f;
+	public float maxSteer = 35.0f;
 	
 	public WheelCollider frontWheel;
 

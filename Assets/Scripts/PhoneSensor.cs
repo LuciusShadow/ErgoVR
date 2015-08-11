@@ -1,7 +1,7 @@
 ﻿/***********************************************************
 * Dateiname: PhoneSensor.cs
 * Autor: Sascha Bach
-* letzte Aenderung: 03.08.2015
+* letzte Aenderung: 10.08.2015
 * Inhalt: enthaelt die Implementierung der Klasse PathScript
 ***********************************************************/
 using UnityEngine;
@@ -88,7 +88,7 @@ public class PhoneSensor : MonoBehaviour{
 					return;
 
 				string udpString = Encoding.UTF8.GetString(data);
-				print(">> " + udpString);
+				//print(">> " + udpString);
 
 				//Parsen und splitten des Strings
 				udpString.Trim();
