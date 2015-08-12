@@ -16,7 +16,7 @@ using System.Collections;
 public class BikePitch : MonoBehaviour {
 
 	public float turnSpeed = 100;  //Rotationsgeschwindigkeit
-	public float maxRotation = 40; //Maximale Rotation
+	public float maxRotation = 20; //Maximale Rotation
 	public GameObject bike;
 
 	float pitch;				   
@@ -61,11 +61,11 @@ public class BikePitch : MonoBehaviour {
 	void Update () {
 		//Berechnung der Neigung
 		pitch = accelerometer.Acceleration.y;
-		pitch = -pitch * maxRotation;
+		pitch = (-pitch * maxRotation*100f)/100f;
 		//Passe Richtung an.
 		//transform.rotation =  Quaternion.Euler(transform.rotation.x,-bike.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
-		//Anwendung der Neigung auf bis maximal 30 Grad
+		//Anwendung der Neigung auf bis maximal 40 Grad
 		if(Mathf.Abs(pitch) <= 20f) 
 			//transform.RotateAround(rotationPoint.position, transform.forward, pitch);
 			//transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0,-180 + bike.transform.rotation.eulerAngles.y,0),turnSpeed*Time.deltaTime);

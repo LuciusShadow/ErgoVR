@@ -26,6 +26,8 @@ public class GameController : MonoBehaviour {
 
 	float time;				//Spielzeit seit Start
 	float endTime;			//Benötigte Gesamtzeit
+
+	public AudioClip hitSound; //Sound bei Lebenspunktverlust
 	
 	bool gameActive = false;//Steuervariable 
 	public bool GameActive
@@ -128,6 +130,7 @@ public class GameController : MonoBehaviour {
 				break;
 			default: 
 				energy = energy - 1;
+				AudioSource.PlayClipAtPoint(hitSound, new Vector3(0,0,0));
 				print (other.name);
 				if(energy == 0){
 					gameActive = false;
