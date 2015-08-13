@@ -1,7 +1,7 @@
 /***********************************************************
 * Dateiname: MoveBike.cs
 * Autor: Sascha Bach
-* letzte Aenderung: 10.08.2015
+* letzte Aenderung: 13.08.2015
 * Inhalt: enthaelt die Implementierung der Klasse MoveBike
 ***********************************************************/
 using UnityEngine;
@@ -43,7 +43,7 @@ public class MoveBike : MonoBehaviour {
 	 ***********************************************************/
 	void Update () {
 		
-		float weight = 70f;										//Pauschal angenommenes Personengewicht
+		float weight = 75f;										//Pauschal angenommenes Personengewicht
 		weight = weight * 10; 									//Umrechnen in Newton
 		//float vx = Mathf.Abs(accelerometer.Acceleration.x);		
 		float vz = Mathf.Abs(accelerometer.Acceleration.z);
