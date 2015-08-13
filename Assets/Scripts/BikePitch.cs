@@ -15,11 +15,12 @@ using System.Collections;
 ***********************************************************/
 public class BikePitch : MonoBehaviour {
 
-	public float turnSpeed = 100;  //Rotationsgeschwindigkeit
-	public float maxRotation = 20; //Maximale Rotation
+	public float turnSpeed = 1f;  //Rotationsgeschwindigkeit
+	public float maxRotation = 100; //Maximale Rotation
 	public GameObject bike;
 
-	float pitch;				   
+	float pitch;
+	float oldPitch;
 	Vector3 bikePosition;
 	int turnspeed;
 	SerialPortScript accelerometer;
@@ -61,17 +62,25 @@ public class BikePitch : MonoBehaviour {
 	void Update () {
 		//Berechnung der Neigung
 		pitch = accelerometer.Acceleration.y;
-		pitch = (-pitch * maxRotation*100f)/100f;
-		//Passe Richtung an.
-		//transform.rotation =  Quaternion.Euler(transform.rotation.x,-bike.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+		if(Mathf.Abs(pitch - oldPitch) > 0.02f)
+		{
+			pitch = pitch * maxRotation;
+			//Passe Richtung an.
+			//transform.rotation =  Quaternion.Euler(transform.rotation.x,-bike.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
-		//Anwendung der Neigung auf bis maximal 40 Grad
-		if(Mathf.Abs(pitch) <= 20f) 
-			//transform.RotateAround(rotationPoint.position, transform.forward, pitch);
-			//transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0,-180 + bike.transform.rotation.eulerAngles.y,0),turnSpeed*Time.deltaTime);
-			SetEulerAngles(transform.eulerAngles.x, -180 + bike.transform.rotation.eulerAngles.y, 0 -pitch);
-			else
-			transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0,90,0),turnSpeed*Time.deltaTime);
+			//pitch = Mathf.Abs(pitch);
+			//Anwendung der Neigung auf bis maximal 40 Grad
+			//if(pitch < -4.1f || pitch > -4.8f) 
+				//transform.RotateAround(rotationPoint.position, transform.forward, pitch);
+				//transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0,-180 + bike.transform.rotation.eulerAngles.y,0),turnSpeed*Time.deltaTime);
+				transform.rotation = Quaternion.RotateTowards(transform.rotation, 
+				                                              Quaternion.Euler(transform.eulerAngles.x,-180 + bike.transform.rotation.eulerAngles.y,0 + (pitch -4)*2),
+				                                              turnSpeed*Time.deltaTime);
+					//SetEulerAngles(transform.eulerAngles.x, -180 + bike.transform.rotation.eulerAngles.y, 0 + (pitch -4)*2);
+	//			else
+	//			transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0,90,0),turnSpeed*Time.deltaTime);
+			oldPitch = pitch/maxRotation;
+		}
 	}
 
 	void SetEulerAngles(float x, float y, float z){

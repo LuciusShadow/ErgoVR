@@ -5,6 +5,7 @@
 * Inhalt: enthaelt die Implementierung der Klasse MoveBike
 ***********************************************************/
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 /***********************************************************
@@ -19,6 +20,7 @@ public class MoveBike : MonoBehaviour {
 	public WheelCollider rearWheel;
 	public GameObject bike;
 	Transform bBody;
+	public Text accDatenAnzeige;
 
 	/***********************************************************
 	 * Methode: Start
@@ -39,31 +41,31 @@ public class MoveBike : MonoBehaviour {
 	 * Parameter: keine
 	 * Rückgabewert: keinen
 	 ***********************************************************/
-	void FixedUpdate () {
+	void Update () {
 		
-		float weight = 60f;										//Pauschal angenommenes Personengewicht
+		float weight = 70f;										//Pauschal angenommenes Personengewicht
 		weight = weight * 10; 									//Umrechnen in Newton
-		float vx = Mathf.Abs(accelerometer.Acceleration.x);		
+		//float vx = Mathf.Abs(accelerometer.Acceleration.x);		
 		float vz = Mathf.Abs(accelerometer.Acceleration.z);
 		float force = 0f;
 		//Example values in cm (Genaue Werte am Fahrrad ausmessen)
 		int pedalr = 10;
 		int frontTeethr = 20;
-		int rearTeethr = 5;
+		int rearTeethr = 10;
 
 		float torque = 0;
 		float v;												//Variable für Beschleunigung
-		v=vx+vz;
-
+		v=vz;
+		print (v);
 		//Berechne v nur wenn Accelerometerdaten Schwelle überschreiten
-		if(v > 1.2f){
+		if(v > 1f){
 			force =  weight * v * pedalr;
 		}
 		//Hinteres Zahnrad * (Kraft / vorderes Zahnrad)
 		torque = rearTeethr * (force / frontTeethr);
 		//Kompensieren der Masseeinstellungen im Editor
 		torque = torque * Time.deltaTime;
-
+		accDatenAnzeige.text = torque.ToString("0.00");
 		//Umkippen des Rades vermeiden, setze Winkel um z auf Konstant null
 		bike.transform.eulerAngles = new Vector3(
 			bike.transform.eulerAngles.x,

@@ -1,10 +1,11 @@
 ﻿/***********************************************************
 * Dateiname: Handlebars.cs
 * Autor: Sascha Bach
-* letzte Aenderung: 03.08.2015
+* letzte Aenderung: 13.08.2015
 * Inhalt: enthaelt die Implementierung der Klasse Menu
 ***********************************************************/
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 /***********************************************************
@@ -17,11 +18,14 @@ public class Handlebars : MonoBehaviour {
 	Vector3 bikePosition;
 	int maxAngle = 10;
 
+	Vector3 startRot;
+
 	public Transform body;
 	public WheelCollider frontWheel;
 	public PhoneSensor phone;
 	Vector3 gyroData;
 	public GameObject obstacles;
+	public Text gyroText;
 
 	/***********************************************************
 	 * Methode: Start
@@ -30,6 +34,7 @@ public class Handlebars : MonoBehaviour {
 	 * Rückgabewert: keiner
 	 ***********************************************************/
 	void Start () {
+		startRot = transform.eulerAngles;
 		gyroData = new Vector3(0,0,0);
 	}
 	
@@ -42,7 +47,7 @@ public class Handlebars : MonoBehaviour {
 	 * Parameter: keine
 	 * Rückgabewert: keinen
 	 ***********************************************************/
-	void FixedUpdate () {
+	void Update () {
 		gyroData = phone.Gyrodata;		
 
 		//Steuere Hindernisserscheinung
@@ -60,11 +65,16 @@ public class Handlebars : MonoBehaviour {
 		#endregion
 
 		float rotate = -gyroData.y * maxAngle;
+		gyroText.text = gyroData.y.ToString("0.00");
 		frontWheel.steerAngle = transform.localEulerAngles.y; //Winkel des Wheelcolliders
 		transform.Rotate(0,rotate,0);						  //Winkel des Modells
 		//setEulerAngles(transform.eulerAngles.x, rotate+body.eulerAngles.y, body.eulerAngles.z);
 
 
+	}
+
+	public void resetHandle(){
+		transform.eulerAngles = startRot;
 	}
 
 //	void setEulerAngles(float x, float y, float z){

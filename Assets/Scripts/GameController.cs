@@ -1,7 +1,7 @@
 ﻿/***********************************************************
 * Dateiname: GameController.cs
 * Autor: Sascha Bach
-* letzte Aenderung: 03.08.2015
+* letzte Aenderung: 13.08.2015
 * Inhalt: enthaelt die Implementierung der Klasse GameController
 ***********************************************************/
 using UnityEngine;
@@ -22,12 +22,15 @@ public class GameController : MonoBehaviour {
 
 	public int score;		//Aktueller Punktestand
 	public int lab;			//Aktuelle Runde
-	public int energy = 3;	//Aktuelle Lebenspunkte
+	public int energy;	//Aktuelle Lebenspunkte
 
 	float time;				//Spielzeit seit Start
 	float endTime;			//Benötigte Gesamtzeit
 
 	public AudioClip hitSound; //Sound bei Lebenspunktverlust
+
+	public Toggle toggleLife;
+	public Text lifePoints;
 	
 	bool gameActive = false;//Steuervariable 
 	public bool GameActive
@@ -63,10 +66,14 @@ public class GameController : MonoBehaviour {
 		goText.enabled = false;
 		lab = lab + 1;
 		score = 0;
-		time = 0f;
+		time = 0;
 		endTime = 0;
 		//Ignoriere Layerkollision zwischen Collider des Fahrrads und Collider des Zielschilds
 		Physics.IgnoreLayerCollision(9,10);
+		if(lifePoints.text == "")
+			energy = 0;
+		else
+			energy = System.Int32.Parse(lifePoints.text);
 	}
 	
 	/***********************************************************
@@ -80,7 +87,6 @@ public class GameController : MonoBehaviour {
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Escape))
 			gameActive = !gameActive;
-
 		//Freeze/Defreeze des Spiels
 		if(gameActive){
 			Time.timeScale = 1;
@@ -90,11 +96,14 @@ public class GameController : MonoBehaviour {
 
 		//HUD Anzeige
 		if(raceStart && gameActive){
-			hud.text = "Score: "+score+" Health: " + energy + " Time: " + (Time.realtimeSinceStartup - time).ToString("0.00");
+			if(toggleLife.isOn)
+				hud.text = "Score: "+score+" Health: " + energy + " Time: " + (Time.realtimeSinceStartup - time).ToString("0.00");
+			else
+				hud.text = "Score: "+score+" Time: " + (Time.realtimeSinceStartup - time).ToString("0.00");
 		}
 
 		//Game Over Anzeige
-		if(energy <= 0 ){
+		if(energy <= 0 && toggleLife.isOn){
 			time = Time.realtimeSinceStartup - time;
 			if(!gameActive){
 				goText.enabled = true;
@@ -117,7 +126,8 @@ public class GameController : MonoBehaviour {
 				score = score + scoreFactor; //Für jedes PickUp ein Punktezuwachs
 				break;
 			case "Ziellinie":
-				if(time == 0){
+				if(raceStart == false){
+				print ("ziellinie hit");
 					time = Time.realtimeSinceStartup;
 					raceStart = true;
 					lab = lab - 1;
@@ -129,10 +139,11 @@ public class GameController : MonoBehaviour {
 				//Kollisionen mit dem Terrain soll ignoriert werden
 				break;
 			default: 
-				energy = energy - 1;
+				if(toggleLife.isOn)
+					energy = energy - 1;
 				AudioSource.PlayClipAtPoint(hitSound, new Vector3(0,0,0));
 				print (other.name);
-				if(energy == 0){
+				if(energy == 0 && toggleLife.isOn){
 					gameActive = false;
 					endTime = Time.realtimeSinceStartup - time;
 					//Time.timeScale = 0;

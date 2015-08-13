@@ -41,7 +41,7 @@ public class WheelRotation : MonoBehaviour {
 	 * Rückgabewert: keiner
 	 ***********************************************************/
 	void Update () {
-		velocity = -bike.velocity.z;
+		velocity = bike.velocity.z;
 
 		frontWheel.Rotate(velocity,0,0);		//Rotation des Vorderrads
 		rearWheel.Rotate(velocity,0,0);			//Rotation des Hinterrads

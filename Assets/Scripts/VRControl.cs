@@ -87,7 +87,7 @@ public class VRControl : MonoBehaviour {
 		Vector3 ovrAcc = new Vector3(0,0,0);
 		if(xTracking || yTracking){
 			ovrAcc = OVRManager.display.acceleration;
-			yFactor = CamCenter.localPosition.y*10;
+			yFactor = CamCenter.localPosition.y*6.5f;
 
 		}
 			

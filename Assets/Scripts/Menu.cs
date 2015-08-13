@@ -16,6 +16,8 @@ using System.Collections;
 public class Menu : MonoBehaviour {
 	public Canvas userMenu;
 
+	Vector3 startPos;
+	Vector3 startRot;
     public GameObject Bike;
 	public GameObject BikeBody;
 	public GameObject Handlebars;
@@ -27,16 +29,15 @@ public class Menu : MonoBehaviour {
 	BikePitch bikePitch;
 	Handlebars handlebars;
 	AutoSteer autoSteer;
-	VRControl vrControl;
+
 
 	public Toggle toggleMove;
 	public Toggle togglePitch;
 	public Toggle toggleHandle;
-
+	public Toggle lifeOption;
 	public Button endButton;
-
-	Transform startPosition;
-
+	
+	public GameObject lifeCount;
 	public GameObject ovrRig;
 
 	public GameObject stones;
@@ -52,6 +53,8 @@ public class Menu : MonoBehaviour {
 	 * Rückgabewert: keiner
 	 ***********************************************************/
 	void Start () {
+		startPos = Bike.transform.position;
+		startRot = Bike.transform.eulerAngles;
 		moveBike = Bike.GetComponent<MoveBike>();
 		moveBikeAuto = Bike.GetComponent<AutoMove>();
 
@@ -60,13 +63,12 @@ public class Menu : MonoBehaviour {
 		handlebars = Handlebars.GetComponent<Handlebars>();
 		autoSteer = Handlebars.GetComponent<AutoSteer>();
 
-		vrControl = DataHub.GetComponent<VRControl>();
 
 		toggleMove.isOn = moveBike.enabled;
 		togglePitch.isOn = bikePitch.enabled;
 		toggleHandle.isOn = handlebars.enabled;
 
-		startPosition = Bike.transform;
+
 	}
 
 	/***********************************************************
@@ -83,7 +85,7 @@ public class Menu : MonoBehaviour {
 		bikePitch.enabled = togglePitch.isOn;
 		handlebars.enabled = toggleHandle.isOn;
 		autoSteer.enabled = !toggleHandle.isOn;
-
+		lifeCount.SetActive(lifeOption.isOn);
 		//Steuerung der Objekte
 		stones.SetActive(handlebars.enabled);
 		autoPickUps.SetActive(autoSteer.enabled);
@@ -111,7 +113,14 @@ public class Menu : MonoBehaviour {
 	 * Rückgabewert: keinen
 	 ***********************************************************/
 	public void ResetButton(){
-		Application.LoadLevel(0);
+		//Application.LoadLevel(Application.loadedLevel);
+		Bike.transform.position = startPos;
+		Bike.transform.eulerAngles = startRot;
+		Bike.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
+		autoSteer.currentPathObject = 0;
+		Start ();
+
+
 	}
 
 	/***********************************************************
