@@ -2,7 +2,7 @@
 /***********************************************************
 * Dateiname: BikePitch.cs
 * Autor: Sascha Bach
-* letzte Aenderung: 10.08.2015
+* letzte Aenderung: 22.08.2015
 * Inhalt: enthaelt die Implementierung der Klasse BikePitch
 ***********************************************************/
 using UnityEngine;
@@ -62,24 +62,15 @@ public class BikePitch : MonoBehaviour {
 	void Update () {
 		//Berechnung der Neigung
 		pitch = accelerometer.Acceleration.y;
+		//Schwellwert um Zittern zu vermeiden
 		if(Mathf.Abs(pitch - oldPitch) > 0.02f)
 		{
+			oldPitch = pitch;
 			pitch = pitch * maxRotation;
 			//Passe Richtung an.
-			//transform.rotation =  Quaternion.Euler(transform.rotation.x,-bike.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-
-			//pitch = Mathf.Abs(pitch);
-			//Anwendung der Neigung auf bis maximal 40 Grad
-			//if(pitch < -4.1f || pitch > -4.8f) 
-				//transform.RotateAround(rotationPoint.position, transform.forward, pitch);
-				//transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0,-180 + bike.transform.rotation.eulerAngles.y,0),turnSpeed*Time.deltaTime);
-				transform.rotation = Quaternion.RotateTowards(transform.rotation, 
-				                                              Quaternion.Euler(transform.eulerAngles.x,-180 + bike.transform.rotation.eulerAngles.y,0 + (pitch -4)*2),
-				                                              turnSpeed*Time.deltaTime);
-					//SetEulerAngles(transform.eulerAngles.x, -180 + bike.transform.rotation.eulerAngles.y, 0 + (pitch -4)*2);
-	//			else
-	//			transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0,90,0),turnSpeed*Time.deltaTime);
-			oldPitch = pitch/maxRotation;
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, 
+				                                          Quaternion.Euler(transform.eulerAngles.x,-180 + bike.transform.rotation.eulerAngles.y,0 + (pitch -4)*2),
+				                                          turnSpeed*Time.deltaTime);
 		}
 	}
 

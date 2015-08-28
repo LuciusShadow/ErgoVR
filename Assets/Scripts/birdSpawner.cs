@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/***********************************************************
+* Dateiname: birdSpawner.cs
+* Autor: Eric Heung
+* letzte Aenderung: 10.08.2015
+* Inhalt: enthaelt die Implementierung der Klasse birdSpawner
+***********************************************************/
+using UnityEngine;
 using System.Collections;
 
 public class birdSpawner : MonoBehaviour {

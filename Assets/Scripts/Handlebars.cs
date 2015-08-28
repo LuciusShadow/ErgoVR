@@ -1,7 +1,7 @@
 ﻿/***********************************************************
 * Dateiname: Handlebars.cs
 * Autor: Sascha Bach
-* letzte Aenderung: 13.08.2015
+* letzte Aenderung: 22.08.2015
 * Inhalt: enthaelt die Implementierung der Klasse Menu
 ***********************************************************/
 using UnityEngine;
@@ -34,7 +34,7 @@ public class Handlebars : MonoBehaviour {
 	 * Rückgabewert: keiner
 	 ***********************************************************/
 	void Start () {
-		startRot = transform.eulerAngles;
+		startRot = transform.localEulerAngles;
 		gyroData = new Vector3(0,0,0);
 	}
 	
@@ -49,7 +49,7 @@ public class Handlebars : MonoBehaviour {
 	 ***********************************************************/
 	void Update () {
 		gyroData = phone.Gyrodata;		
-
+		print (startRot);
 		//Steuere Hindernisserscheinung
 		if(obstacles.activeSelf == false)
 			obstacles.SetActive(true);
@@ -59,7 +59,7 @@ public class Handlebars : MonoBehaviour {
 		//transform.Rotate(this.transform.up, 10 * Time.deltaTime); 
 		//Testing
 
-		#region Manuelle Steuerung
+		#region Tastatursteuerung
 		//float rotate = accelerometer.Acceleration.y * maxAngle;
 		//float steer = 30 * Input.GetAxis("Horizontal");
 		#endregion

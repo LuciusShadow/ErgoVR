@@ -1,7 +1,7 @@
 ﻿/***********************************************************
 * Dateiname: Menu.cs
 * Autor: Sascha Bach
-* letzte Aenderung: 03.08.2015
+* letzte Aenderung: 22.08.2015
 * Inhalt: enthaelt die Implementierung der Klasse Menu
 ***********************************************************/
 using UnityEngine;
